@@ -8,14 +8,21 @@
   
     https://github.com/ychen-207523/PopcornPicks/
 
+## EDIT: While trying to install this on my Mac, I found I needed to run the following (I have Homebrew installed) in order to complete step 2
+
+    brew install mysql pkg-config
+    pip install mysqlclient
+
 ## Step 2: Install the required packages by running the following command in the terminal
    
     pip install -r requirements.txt
 
 ## Step 3: MySQL Install
-   Download and Install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) and [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
+   Download and Install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
 
-## Step 4: Setting up MySQL Community Server
+## Step 4: Installing MySQL Community Server
+
+   Download and Install [MySQL Community Server](https://dev.mysql.com/downloads/mysql/) with the following install selections:
 
    In the `Type and Networking` tab, select config type as **Server Computer**
    
