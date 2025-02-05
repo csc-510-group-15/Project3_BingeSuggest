@@ -10,7 +10,7 @@ $(document).ready(function () {
 			source: function (request, response) {
 				$.ajax({
 					type: "POST",
-					url: "http://127.0.0.1:5000/search",
+					url: "http://127.0.0.1:5001/search",
 					dataType: "json",
 					cache: false,
 					data: {
@@ -66,7 +66,7 @@ $(document).ready(function () {
 			source: function (request, response) {
 				$.ajax({
 					type: "POST",
-					url: "http://127.0.0.1:5000/search",
+					url: "http://127.0.0.1:5001/search",
 					dataType: "json",
 					cache: false,
 					data: {
@@ -100,7 +100,7 @@ $(document).ready(function () {
 			  // Send a POST request to the server to add the movie to the watchlist
 			  $.ajax({
 				type: "POST",
-				url: "http://127.0.0.1:5000/add_to_watchlist",
+				url: "http://127.0.0.1:5001/add_to_watchlist",
 				contentType: "application/json",
 				data: JSON.stringify({ movieName:movieName }),
 				success: function(response) {
@@ -212,7 +212,7 @@ $(document).ready(function () {
 					try{
 						movieData = await fetchMovieData(imdbID);
 						a
-						.attr("href", 'http://127.0.0.1:5000/movie/' + movieData.imdbID)
+						.attr("href", 'http://127.0.0.1:5001/movie/' + movieData.imdbID)
 						.css({ "text-decoration": "none" })	
 						li.append(a)
 					} catch(error){
@@ -383,7 +383,7 @@ $(document).ready(function () {
 					try{
 						movieData = await fetchMovieData(imdbID);
 						a
-						.attr("href", 'http://127.0.0.1:5000/movie/' + movieData.imdbID)
+						.attr("href", 'http://127.0.0.1:5001/movie/' + movieData.imdbID)
 						.css({ "text-decoration": "none" })	
 						li.append(a)
 					} catch(error){
@@ -553,7 +553,7 @@ $(document).ready(function () {
 					try{
 						movieData = await fetchMovieData(imdbID);
 						a
-						.attr("href", 'http://127.0.0.1:5000/movie/' + movieData.imdbID)
+						.attr("href", 'http://127.0.0.1:5001/movie/' + movieData.imdbID)
 						.css({ "text-decoration": "none" })	
 						li.append(a)
 					} catch(error){
@@ -723,7 +723,7 @@ $(document).ready(function () {
 					try{
 						movieData = await fetchMovieData(imdbID);
 						a
-						.attr("href", 'http://127.0.0.1:5000/movie/' + movieData.imdbID)
+						.attr("href", 'http://127.0.0.1:5001/movie/' + movieData.imdbID)
 						.css({ "text-decoration": "none" })	
 						li.append(a)
 					} catch(error){
