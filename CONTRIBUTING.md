@@ -45,6 +45,8 @@
     - data.py
     - search.py
     - utils.py
+    
+- db
   - init.sql
   - movies.sql
   

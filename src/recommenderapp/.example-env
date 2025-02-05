@@ -1,0 +1,6 @@
+DB_USER = 'root'
+DB_PASSWORD = 'root'
+DB_HOST = 'db'
+DB_NAME = 'PopcornPicksDB'
+
+OMDB_API_KEY = '<your_omdb_api_key>'
