@@ -2,8 +2,41 @@
 Copyright (c) 2023 Nathan Kohen, Nicholas Foster, Brandon Walia, Robert Kenney
 This code is licensed under MIT license (see LICENSE for details)
 
+
+
 @author: PopcornPicks
  */
+
+function recos(i) { return `
+	<table class='table predictTable'>
+	  <tr >
+		<td class='radio-inline'>
+		  <section id="pattern1">
+			<label style="--icon:'😍'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE" >
+			  <span >Like</span>
+			</label>
+		  </section>
+		</td>
+		<td class='radio-inline'>
+		  <section id="pattern1">
+			<label style="--icon:'🤔'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH">
+			
+			  <span style="margin-right:40px;">Yet&nbsp;To&nbsp;Watch</span>
+			</label>
+		  </section>
+		</td>
+		<td class='radio-inline'>
+		  <section id="pattern1">
+			<label style="--icon:'☹️'; display: flex; align-items: center; justify-content: center; "><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE">
+			
+		  <span >Dislike</span>
+			</label>
+		  </section>
+		</td>
+	  </tr>
+	</table>
+  `}
+
 $(document).ready(function () {
 	$(function () {
 		$("#searchBox").autocomplete({
@@ -219,35 +252,7 @@ $(document).ready(function () {
 						console.error(error);
 					}
     				var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:150px; height:220px'})				
-					var radios = $(`
-                    <table class='table predictTable'>
-                      <tr >
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'😍'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE" >
-              				<span >Like</span>
-							</label>
-                          </section>
-                        </td>
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'🤔'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH">
-							
-              				<span style="margin-right:40px;">Yet&nbsp;To&nbsp;Watch</span>
-							</label>
-                          </section>
-                        </td>
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'☹️'; display: flex; align-items: center; justify-content: center; "><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE">
-							
-              			<span >Dislike</span>
-							</label>
-                          </section>
-                        </td>
-                      </tr>
-                    </table>
-                  `)
+					var radios = $(recos(i))
 
 				  var watchlistButton = $("<button/>")
 				  .text("Add to Watchlist")
