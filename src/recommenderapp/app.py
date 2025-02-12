@@ -296,6 +296,8 @@ def username():
     """
     Gets the username of the active user
     """
+    if user[1] == "guest":
+        return jsonify("guest")
     return get_username(g.db, user[1])
 
 

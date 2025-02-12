@@ -193,7 +193,25 @@ $(document).ready(function () {
 			});
 	}
 
-	$(document).on("click", "#genreBased", function() {
+	function getUserName(callback) {
+		$.ajax({
+			type: 'GET',
+			url: '/getUserName',
+			contentType: "application/json;charset=UTF-8",
+			success: function (response) {
+				callback(null, response);
+			},
+			error: function (error) {
+				callback(error, null);
+			}
+		});
+	}
+
+	//This function gets called after the user enters the movies they want to base their recommendation off of,
+	//and they select the basis for the recommendation. This function loads all of the movie recommendations that come 
+	//from the backend. 
+	//The basis parameter is a string that tells the backend what basis to use for the recommendation.
+	function loadRecommendations(basis, username) {
 		$("#loader").attr("class", "d-flex justify-content-center")
 
 		var movie_list = []
@@ -210,12 +228,12 @@ $(document).ready(function () {
 
 		// if movies list empty then throw an error box saying select atleast 1 movie!!
 		if (movie_list.length == 0) {
-			alert("Select atleast 1 movie!!")
+			alert("Select atleast 1 movie!")
 		}
 
 		$.ajax({
 			type: "POST",
-			url: "/genreBased",
+			url: "/" + basis,
 			dataType: "json",
 			contentType: "application/json;charset=UTF-8",
 			traditional: "true",
@@ -304,9 +322,15 @@ $(document).ready(function () {
     				});
 					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
 					var row = $("<tr />");
-					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton);// Radio buttons and Watchlist button in the left column
+					
+					console.log("User Name:", username);
+					var leftColumn = null;
+					if (username == "guest" || username == null) {
+						var leftColumn = $("<td width='80%' />").append(li).append(link);// Radio buttons and Watchlist button in the left column
+					} else {
+						var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton);// Radio buttons and Watchlist button in the left column
+					}
 					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
-
 					row.append(leftColumn).append(rightColumn);
 					tableLayout.append(row);
 
@@ -333,516 +357,46 @@ $(document).ready(function () {
 				$("#loader").attr("class", "d-none")
 			},
 		})
+	}
+
+	$(document).on("click", "#genreBased", function() {
+		getUserName(function (error, response) {
+			if (error) {
+				console.error("Error fetching username:", error);
+			} else {
+				loadRecommendations("genreBased", response)
+			}
+		});
 	})
 
 	$(document).on("click", "#dirBased", function() {
-		$("#loader").attr("class", "d-flex justify-content-center")
-
-		var movie_list = []
-
-		$("#selectedMovies li").each(function () {
-			movie_list.push($(this).text())
-		})
-
-		var movies = { movie_list: movie_list }
-
-		// Clear the existing recommendations
-		$("#predictedMovies").empty()
-		$("#predictedMovies2").empty()
-
-
-		// if movies list empty then throw an error box saying select atleast 1 movie!!
-		if (movie_list.length == 0) {
-			alert("Select atleast 1 movie!!")
-		}
-
-		$.ajax({
-			type: "POST",
-			url: "/dirBased",
-			dataType: "json",
-			contentType: "application/json;charset=UTF-8",
-			traditional: "true",
-			cache: false,
-			data: JSON.stringify(movies),
-			success: async function (response) {
-				var ulList = $("#predictedMovies")
-				var i = 0
-				var recommendations = response["recommendations"]
-				var imdbIds = response["imdb_id"]
-				for (var i = 0; i < recommendations.length; i++) {
-					if(i>=5){
-					ulList = $("#predictedMovies2")
-					}
-					
-					var element = recommendations[i]
-					var imdbID = imdbIds[i]
-					var diventry = $("<div class=\"listItem\" />")
-					var fieldset = $("<fieldset/>", { id: i }).css("border", "0")
-					var link = $("<a/>")
-						.text("IMDb🔗")
-						.css({ "text-decoration": "none" })
-						.attr("href", "https://www.imdb.com/title/" + imdbID)
-					var li = $("<li/>")
-					var a = $("<a />").text(element)
-					var movieData;
-					try{
-						movieData = await fetchMovieData(imdbID);
-						a
-						.attr("href", 'http://127.0.0.1:5001/movie/' + movieData.imdbID)
-						.css({ "text-decoration": "none" })	
-						li.append(a)
-					} catch(error){
-						console.error(error);
-					}
-    				var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:150px; height:220px'})				
-					var radios = $(`
-                    <table class='table predictTable'>
-                      <tr >
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'😍'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE" >
-              				<span >Like</span>
-							</label>
-                          </section>
-                        </td>
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'🤔'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH">
-							
-              				<span style="margin-right:40px;">Yet&nbsp;To&nbsp;Watch</span>
-							</label>
-                          </section>
-                        </td>
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'☹️'; display: flex; align-items: center; justify-content: center; "><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE">
-							
-              			<span >Dislike</span>
-							</label>
-                          </section>
-                        </td>
-                      </tr>
-                    </table>
-                  `)
-
-				  var watchlistButton = $("<button/>")
-				  .text("Add to Watchlist")
-				  .attr("data-imdb-id", imdbID)
-				  .addClass("btn btn-secondary btn-sm") // Optional styling for consistency
-				  .click(function (event) {
-					  event.preventDefault();
-					  var imdb_id = $(this).data("imdb-id");
-					  var button = $(this);
-					  $.ajax({
-						  type: "POST",
-						  url: "/add_to_watchlist",
-						  dataType: "json",
-						  contentType: "application/json;charset=UTF-8",
-						  data: JSON.stringify({ imdb_id: imdb_id }),
-						  success: function (response) {
-							  alert(response.message);
-							  button.text("Added").prop("disabled", true);
-						  },
-						  error: function (error) {
-							  console.log("ERROR ->" + error);
-						  }
-					  });
-				  });
-                    var watchedHistoryButton = $("<button/>")
-    				.text("Add to Watched History")
-    				.attr("data-imdb-id", imdbID)
-    				.addClass("btn btn-primary btn-sm") // Optional styling for consistency
-    				.click(function (event) {
-        				event.preventDefault();
-        				var imdb_id = $(this).data("imdb-id");
-        				var button = $(this);
-        				$.ajax({
-            				type: "POST",
-            				url: "/add_to_watched_history",
-            				dataType: "json",
-            				contentType: "application/json;charset=UTF-8",
-            				data: JSON.stringify({ imdb_id: imdb_id }),
-            				success: function (response) {
-                				alert(response.message);
-                				button.text("Added to History").prop("disabled", true);
-            				},
-            					error: function (error) {
-                				console.error("Error adding to watched history:", error);
-                				alert("An error occurred. Please try again.");
-            				}
-        				});
-    				});
-					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
-					var row = $("<tr />");
-					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton); // Radio buttons and Watchlist button in the left column
-					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
-
-					row.append(leftColumn).append(rightColumn);
-					tableLayout.append(row);
-
-					// diventry.append(li)
-					// diventry.append(link)
-					diventry.append(tableLayout)
-					// diventry.append(image)
-					// diventry.append(watchlistButton)
-					fieldset.append(diventry)
-					ulList.append(fieldset)
-				}
-
-				$("#recommendedMoviesSection").removeClass("d-none");
-				$(".feedbackDiv").removeClass("d-none");
-				$("#loader").attr("class", "d-none")
-
-				
-				$("html, body").animate({
-					scrollTop: $("#recommendedMoviesSection").offset().top-60
-				}, 800) // duration of 1 second (1000 ms)
-			},
-			error: function (error) {
-				console.log("ERROR ->" + error)
-				$("#loader").attr("class", "d-none")
-			},
-		})
+		getUserName(function (error, response) {
+			if (error) {
+				console.error("Error fetching username:", error);
+			} else {
+				loadRecommendations("dirBased", response)
+			}
+		});
 	})
 
 	$(document).on("click", "#actorBased", function() {
-		$("#loader").attr("class", "d-flex justify-content-center")
-
-		var movie_list = []
-
-		$("#selectedMovies li").each(function () {
-			movie_list.push($(this).text())
-		})
-
-		var movies = { movie_list: movie_list }
-
-		// Clear the existing recommendations
-		$("#predictedMovies").empty()
-		$("#predictedMovies2").empty()
-
-
-		// if movies list empty then throw an error box saying select atleast 1 movie!!
-		if (movie_list.length == 0) {
-			alert("Select atleast 1 movie!!")
-		}
-
-		$.ajax({
-			type: "POST",
-			url: "/actorBased",
-			dataType: "json",
-			contentType: "application/json;charset=UTF-8",
-			traditional: "true",
-			cache: false,
-			data: JSON.stringify(movies),
-			success: async function (response) {
-				var ulList = $("#predictedMovies")
-				var i = 0
-				var recommendations = response["recommendations"]
-				var imdbIds = response["imdb_id"]
-				for (var i = 0; i < recommendations.length; i++) {
-					if(i>=5){
-					ulList = $("#predictedMovies2")
-					}
-					
-					var element = recommendations[i]
-					var imdbID = imdbIds[i]
-					var diventry = $("<div class=\"listItem\" />")
-					var fieldset = $("<fieldset/>", { id: i }).css("border", "0")
-					var link = $("<a/>")
-						.text("IMDb🔗")
-						.css({ "text-decoration": "none" })
-						.attr("href", "https://www.imdb.com/title/" + imdbID)
-					var li = $("<li/>")
-					var a = $("<a />").text(element)
-					var movieData;
-					try{
-						movieData = await fetchMovieData(imdbID);
-						a
-						.attr("href", 'http://127.0.0.1:5001/movie/' + movieData.imdbID)
-						.css({ "text-decoration": "none" })	
-						li.append(a)
-					} catch(error){
-						console.error(error);
-					}
-    				var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:150px; height:220px'})				
-					var radios = $(`
-                    <table class='table predictTable'>
-                      <tr >
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'😍'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE" >
-              				<span >Like</span>
-							</label>
-                          </section>
-                        </td>
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'🤔'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH">
-							
-              				<span style="margin-right:40px;">Yet&nbsp;To&nbsp;Watch</span>
-							</label>
-                          </section>
-                        </td>
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'☹️'; display: flex; align-items: center; justify-content: center; "><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE">
-							
-              			<span >Dislike</span>
-							</label>
-                          </section>
-                        </td>
-                      </tr>
-                    </table>
-                  `)
-
-				  var watchlistButton = $("<button/>")
-				  .text("Add to Watchlist")
-				  .attr("data-imdb-id", imdbID)
-				  .addClass("btn btn-secondary btn-sm") // Optional styling for consistency
-				  .click(function (event) {
-					  event.preventDefault();
-					  var imdb_id = $(this).data("imdb-id");
-					  var button = $(this);
-					  $.ajax({
-						  type: "POST",
-						  url: "/add_to_watchlist",
-						  dataType: "json",
-						  contentType: "application/json;charset=UTF-8",
-						  data: JSON.stringify({ imdb_id: imdb_id }),
-						  success: function (response) {
-							  alert(response.message);
-							  button.text("Added").prop("disabled", true);
-						  },
-						  error: function (error) {
-							  console.log("ERROR ->" + error);
-						  }
-					  });
-				  });
-                    var watchedHistoryButton = $("<button/>")
-    				.text("Add to Watched History")
-    				.attr("data-imdb-id", imdbID)
-    				.addClass("btn btn-primary btn-sm") // Optional styling for consistency
-    				.click(function (event) {
-        				event.preventDefault();
-        				var imdb_id = $(this).data("imdb-id");
-        				var button = $(this);
-        				$.ajax({
-            				type: "POST",
-            				url: "/add_to_watched_history",
-            				dataType: "json",
-            				contentType: "application/json;charset=UTF-8",
-            				data: JSON.stringify({ imdb_id: imdb_id }),
-            				success: function (response) {
-                				alert(response.message);
-                				button.text("Added to History").prop("disabled", true);
-            				},
-            					error: function (error) {
-                				console.error("Error adding to watched history:", error);
-                				alert("An error occurred. Please try again.");
-            				}
-        				});
-    				});
-					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
-					var row = $("<tr />");
-					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton); // Radio buttons and Watchlist button in the left column
-					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
-
-					row.append(leftColumn).append(rightColumn);
-					tableLayout.append(row);
-
-					// diventry.append(li)
-					// diventry.append(link)
-					diventry.append(tableLayout)
-					// diventry.append(image)
-					// diventry.append(watchlistButton)
-					fieldset.append(diventry)
-					ulList.append(fieldset)
-				}
-
-				$("#recommendedMoviesSection").removeClass("d-none");
-				$(".feedbackDiv").removeClass("d-none");
-				$("#loader").attr("class", "d-none")
-
-				
-				$("html, body").animate({
-					scrollTop: $("#recommendedMoviesSection").offset().top-60
-				}, 800) // duration of 1 second (1000 ms)
-			},
-			error: function (error) {
-				console.log("ERROR ->" + error)
-				$("#loader").attr("class", "d-none")
-			},
-		})
+		getUserName(function (error, response) {
+			if (error) {
+				console.error("Error fetching username:", error);
+			} else {
+				loadRecommendations("actorBased", response)
+			}
+		});
 	})
 
 	$(document).on("click", "#all", function() {
-		$("#loader").attr("class", "d-flex justify-content-center")
-
-		var movie_list = []
-
-		$("#selectedMovies li").each(function () {
-			movie_list.push($(this).text())
-		})
-
-		var movies = { movie_list: movie_list }
-
-		// Clear the existing recommendations
-		$("#predictedMovies").empty()
-		$("#predictedMovies2").empty()
-
-
-		// if movies list empty then throw an error box saying select atleast 1 movie!!
-		if (movie_list.length == 0) {
-			alert("Select atleast 1 movie!!")
-		}
-
-		$.ajax({
-			type: "POST",
-			url: "/all",
-			dataType: "json",
-			contentType: "application/json;charset=UTF-8",
-			traditional: "true",
-			cache: false,
-			data: JSON.stringify(movies),
-			success: async function (response) {
-				var ulList = $("#predictedMovies")
-				var i = 0
-				var recommendations = response["recommendations"]
-				var imdbIds = response["imdb_id"]
-				for (var i = 0; i < recommendations.length; i++) {
-					if(i>=5){
-					ulList = $("#predictedMovies2")
-					}
-					
-					var element = recommendations[i]
-					var imdbID = imdbIds[i]
-					var diventry = $("<div class=\"listItem\" />")
-					var fieldset = $("<fieldset/>", { id: i }).css("border", "0")
-					var link = $("<a/>")
-						.text("IMDb🔗")
-						.css({ "text-decoration": "none" })
-						.attr("href", "https://www.imdb.com/title/" + imdbID)
-					var li = $("<li/>")
-					var a = $("<a />").text(element)
-					var movieData;
-					try{
-						movieData = await fetchMovieData(imdbID);
-						a
-						.attr("href", 'http://127.0.0.1:5001/movie/' + movieData.imdbID)
-						.css({ "text-decoration": "none" })	
-						li.append(a)
-					} catch(error){
-						console.error(error);
-					}
-    				var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:150px; height:220px'})				
-					var radios = $(`
-                    <table class='table predictTable'>
-                      <tr >
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'😍'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE" >
-              				<span >Like</span>
-							</label>
-                          </section>
-                        </td>
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'🤔'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH">
-							
-              				<span style="margin-right:40px;">Yet&nbsp;To&nbsp;Watch</span>
-							</label>
-                          </section>
-                        </td>
-                        <td class='radio-inline'>
-                          <section id="pattern1">
-                            <label style="--icon:'☹️'; display: flex; align-items: center; justify-content: center; "><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE">
-							
-              			<span >Dislike</span>
-							</label>
-                          </section>
-                        </td>
-                      </tr>
-                    </table>
-                  `)
-
-				  var watchlistButton = $("<button/>")
-				  .text("Add to Watchlist")
-				  .attr("data-imdb-id", imdbID)
-				  .addClass("btn btn-secondary btn-sm") // Optional styling for consistency
-				  .click(function (event) {
-					  event.preventDefault();
-					  var imdb_id = $(this).data("imdb-id");
-					  var button = $(this);
-					  $.ajax({
-						  type: "POST",
-						  url: "/add_to_watchlist",
-						  dataType: "json",
-						  contentType: "application/json;charset=UTF-8",
-						  data: JSON.stringify({ imdb_id: imdb_id }),
-						  success: function (response) {
-							  alert(response.message);
-							  button.text("Added").prop("disabled", true);
-						  },
-						  error: function (error) {
-							  console.log("ERROR ->" + error);
-						  }
-					  });
-				  });
-                    var watchedHistoryButton = $("<button/>")
-    				.text("Add to Watched History")
-    				.attr("data-imdb-id", imdbID)
-    				.addClass("btn btn-primary btn-sm") // Optional styling for consistency
-    				.click(function (event) {
-        				event.preventDefault();
-        				var imdb_id = $(this).data("imdb-id");
-        				var button = $(this);
-        				$.ajax({
-            				type: "POST",
-            				url: "/add_to_watched_history",
-            				dataType: "json",
-            				contentType: "application/json;charset=UTF-8",
-            				data: JSON.stringify({ imdb_id: imdb_id }),
-            				success: function (response) {
-                				alert(response.message);
-                				button.text("Added to History").prop("disabled", true);
-            				},
-            					error: function (error) {
-                				console.error("Error adding to watched history:", error);
-                				alert("An error occurred. Please try again.");
-            				}
-        				});
-    				});
-					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
-					var row = $("<tr />");
-					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton); // Radio buttons and Watchlist button in the left column
-					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
-
-					row.append(leftColumn).append(rightColumn);
-					tableLayout.append(row);
-
-					// diventry.append(li)
-					// diventry.append(link)
-					diventry.append(tableLayout)
-					// diventry.append(image)
-					// diventry.append(watchlistButton)
-					fieldset.append(diventry)
-					ulList.append(fieldset)
-				}
-
-				$("#recommendedMoviesSection").removeClass("d-none");
-				$(".feedbackDiv").removeClass("d-none");
-				$("#loader").attr("class", "d-none")
-
-				
-				$("html, body").animate({
-					scrollTop: $("#recommendedMoviesSection").offset().top-60
-				}, 800) // duration of 1 second (1000 ms)
-			},
-			error: function (error) {
-				console.log("ERROR ->" + error)
-				$("#loader").attr("class", "d-none")
-			},
-		})
+		getUserName(function (error, response) {
+			if (error) {
+				console.error("Error fetching username:", error);
+			} else {
+				loadRecommendations("all", response)
+			}
+		});
 	})
 
 
