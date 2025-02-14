@@ -7,7 +7,7 @@ This code is licensed under MIT license (see LICENSE for details)
 @author: PopcornPicks
  */
 
-function recos(i) { return `
+function generateRatingOptions(i) { return `
 	<table class='table predictTable'>
 	  <tr >
 		<td class='radio-inline'>
@@ -270,7 +270,7 @@ $(document).ready(function () {
 						console.error(error);
 					}
     				var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:150px; height:220px'})				
-					var radios = $(recos(i))
+					var radios = $(generateRatingOptions(i))
 
 				  var watchlistButton = $("<button/>")
 				  .text("Add to Watchlist")
@@ -323,10 +323,9 @@ $(document).ready(function () {
 					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
 					var row = $("<tr />");
 					
-					console.log("User Name:", username);
 					var leftColumn = null;
 					if (username == "guest" || username == null) {
-						var leftColumn = $("<td width='80%' />").append(li).append(link);// Radio buttons and Watchlist button in the left column
+						var leftColumn = $("<td width='80%' />").append(li).append(link);// If the user is a guest, don't put radio buttons and wathclist button in the left column
 					} else {
 						var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton);// Radio buttons and Watchlist button in the left column
 					}
@@ -511,7 +510,6 @@ $(document).ready(function () {
 			cache: false,
 			data: JSON.stringify(data),
 			success: function (response) {
-				console.log(response)
 				$("#friendsList").append(response.username);
 				$("#addFriend").val("")
 			},
