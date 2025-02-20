@@ -435,6 +435,7 @@ def get_api_key():
         return jsonify({"apikey": os.getenv("OMDB_API_KEY")})
     return jsonify({"error": "Unauthorized"}), 403
 
+
 @app.route("/get_api_key_streaming", methods=["GET"])
 def get_api_key_streaming():
     """
