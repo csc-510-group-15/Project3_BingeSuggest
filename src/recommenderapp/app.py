@@ -435,6 +435,15 @@ def get_api_key():
         return jsonify({"apikey": os.getenv("OMDB_API_KEY")})
     return jsonify({"error": "Unauthorized"}), 403
 
+@app.route("/get_api_key_streaming", methods=["GET"])
+def get_api_key_streaming():
+    """
+    Provides the Streaming Services API key to the frontend
+    """
+    if user[1] is not None:
+        return jsonify({"apikey": os.getenv("STREAMING_API_KEY")})
+    return jsonify({"error": "Unauthorized"}), 403
+
 
 @app.route("/add_to_watched_history", methods=["POST"])
 def add_movie_to_watched_history():
