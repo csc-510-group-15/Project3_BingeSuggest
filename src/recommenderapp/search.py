@@ -32,7 +32,7 @@ class Search:
         n = len(word)
         res = []
         word = word.lower()
-        for index,row in self.df.iterrows():
+        for index, row in self.df.iterrows():
             curr = row["title"].lower()
             if curr[:n] == word:
                 res.append(row["title"])
@@ -45,12 +45,11 @@ class Search:
         n = len(word)
         res = []
         word = word.lower()
-        for index,row in self.df.iterrows():
+        for index, row in self.df.iterrows():
             curr = row["genres"].lower()
             if curr[:n] == word:
                 res.append(row["title"])
         return res
-
 
     def director_search(self, word):
         """
@@ -59,7 +58,7 @@ class Search:
         n = len(word)
         res = []
         word = word.lower()
-        for index,row in self.df.iterrows():
+        for index, row in self.df.iterrows():
             curr = row["director"].lower()
             if curr[:n] == word:
                 res.append(row["title"])
@@ -72,7 +71,7 @@ class Search:
         n = len(word)
         res = []
         word = word.lower()
-        for index,row in self.df.iterrows():
+        for index, row in self.df.iterrows():
             curr = row["actors"].lower()
             if curr[:n] == word:
                 res.append(row["title"])
@@ -95,13 +94,13 @@ class Search:
         """
         Function to serve the result render
         """
-        if(filter == "genreBased"):
+        if filter == "genreBased":
             resp = self.genre_search(word)
-        elif(filter == "dirBased"):
+        elif filter == "dirBased":
             resp = self.director_search(word)
-        elif(filter == "actorBased"):
+        elif filter == "actorBased":
             resp = self.actor_search(word)
-        elif(filter == "titleBased"):
+        elif filter == "titleBased":
             resp = self.starts_with(word)
         else:
             resp = self.starts_with(word)
