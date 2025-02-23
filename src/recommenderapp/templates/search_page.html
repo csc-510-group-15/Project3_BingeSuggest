@@ -151,38 +151,54 @@ ul {
               <ul class="list-group" id="selectedMovies" style="margin:20px; margin-right:40px;"></ul>
             </div>
 
+
             <div class="col-md-2 " >
 
               <div class="form-group">
-                <label for="genres">Choose a category:</label>
-                
-                <select class="form-control" id="dropdown" placeholder="Select" name="Select" onchange="createButton()">
-                    <option value="" name="Select">Select a category</option>
-                    <option value="genreBased" name="Genre">Genre</option>
-                    <option value="dirBased" name="Director">Director</option>
-                    <option value="actorBased" name="Actor">Actor</option>
-                    <option value="all" name="All">All</option>
-                    
+                <label for="genres">Search category:</label>
+
+                <select class="form-control" id="filter" placeholder="Title" name="Title" >
+                  <option value="titleBased" name="Title">Title</option>
+                  <option value="genreBased" name="Genre">Genre</option>
+                  <option value="dirBased" name="Director">Director</option>
+                  <option value="actorBased" name="Actor">Actor</option>
+
                 </select>
-            </div>
+              </div>
               
             </div>
             
-            <div class="col-md-2 " >
-              <!-- <label for="genres">Recommend</label> -->
-              <div id="placeholder" ></div>
-              <!-- <h3>Predict:</h3>
-              <input type="button" class="btn btn-light" name="genreBased" id="genreBased" value="genreBased" />
-              <input type="button" class="btn btn-light" name="dirBased" id="dirBased" value="dirBased" />
-              <input type="button" class="btn btn-light" name="actorBased" id="actorBased" value="actorBased" />
-              <input type="button" class="btn btn-light" name="all" id="all" value="All" /> -->
 
-              
-            </div>
           </div>
      </div>
     </div>
   </div>
+
+
+    <div class="col-md-6 " >
+
+      <div class="form-group">
+        <label for="genres">Choose a Recommendation category:</label>
+
+        <select class="form-control" id="dropdown" placeholder="Select" name="Select" onchange="createButton()">
+          <option value="" name="Select">Select a category</option>
+          <option value="genreBased" name="Genre">Genre</option>
+          <option value="dirBased" name="Director">Director</option>
+          <option value="actorBased" name="Actor">Actor</option>
+          <option value="all" name="All">All</option>
+
+        </select>
+      </div>
+      <!-- <label for="genres">Recommend</label> -->
+      <div id="placeholder" ></div>
+      <!-- <h3>Predict:</h3>
+      <input type="button" class="btn btn-light" name="genreBased" id="genreBased" value="genreBased" />
+      <input type="button" class="btn btn-light" name="dirBased" id="dirBased" value="dirBased" />
+      <input type="button" class="btn btn-light" name="actorBased" id="actorBased" value="actorBased" />
+      <input type="button" class="btn btn-light" name="all" id="all" value="All" /> -->
+
+
+    </div>
 
   <div class="container">
     <div class="row">
