@@ -51,7 +51,6 @@ class Search:
                 res.append(x)
         return res
 
-
     def director_search(self, word):
         """
         Function to check movie by director
@@ -95,13 +94,13 @@ class Search:
         """
         Function to serve the result render
         """
-        if(filter == "genreBased"):
+        if filter == "genreBased":
             resp = self.genre_search(word)
-        elif(filter == "directorBased"):
+        elif filter == "directorBased":
             resp = self.director_search(word)
-        elif(filter == "actorBased"):
+        elif filter == "actorBased":
             resp = self.actor_search(word)
-        elif(filter == "titleBased"):
+        elif filter == "titleBased":
             resp = self.starts_with(word)
         else:
             resp = self.starts_with(word)
