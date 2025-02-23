@@ -195,7 +195,7 @@ def search():
     Handles movie search requests.
     """
     term = request.form["q"]
-    filter_term = request.form.get("filter")
+    filter_term = request.form["filter"]
     finder = Search()
     filtered_dict = finder.results_top_ten(term, filter_term)
     resp = jsonify(filtered_dict)

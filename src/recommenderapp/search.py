@@ -32,10 +32,10 @@ class Search:
         n = len(word)
         res = []
         word = word.lower()
-        for x in self.df["title"]:
-            curr = x.lower()
+        for index,row in self.df.iterrows():
+            curr = row["title"].lower()
             if curr[:n] == word:
-                res.append(x)
+                res.append(row["title"])
         return res
 
     def genre_search(self, word):
@@ -45,10 +45,10 @@ class Search:
         n = len(word)
         res = []
         word = word.lower()
-        for x in self.df["genres"]:
-            curr = x.lower()
+        for index,row in self.df.iterrows():
+            curr = row["genres"].lower()
             if curr[:n] == word:
-                res.append(x)
+                res.append(row["title"])
         return res
 
 
@@ -59,10 +59,10 @@ class Search:
         n = len(word)
         res = []
         word = word.lower()
-        for x in self.df["director"]:
-            curr = x.lower()
+        for index,row in self.df.iterrows():
+            curr = row["director"].lower()
             if curr[:n] == word:
-                res.append(x)
+                res.append(row["title"])
         return res
 
     def actor_search(self, word):
@@ -72,10 +72,10 @@ class Search:
         n = len(word)
         res = []
         word = word.lower()
-        for x in self.df["actors"]:
-            curr = x.lower()
+        for index,row in self.df.iterrows():
+            curr = row["actors"].lower()
             if curr[:n] == word:
-                res.append(x)
+                res.append(row["title"])
         return res
 
     def anywhere(self, word, visited_words):
@@ -97,7 +97,7 @@ class Search:
         """
         if(filter == "genreBased"):
             resp = self.genre_search(word)
-        elif(filter == "directorBased"):
+        elif(filter == "dirBased"):
             resp = self.director_search(word)
         elif(filter == "actorBased"):
             resp = self.actor_search(word)
@@ -116,7 +116,6 @@ class Search:
         """
         Function to get top 10 results
         """
-        print(filter)
         return self.results(word, filter)[:10]
 
 
