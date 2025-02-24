@@ -39,38 +39,28 @@ class Search:
         return res
 
     def search(self, word, filter):
-        n = len(word)
+        #n = len(word)
         res = []
         word = word.lower()
+        filter_key = ""
 
         if filter == "genreBased":
-            for index, row in self.df.iterrows():
-                curr = row["genres"].lower()
-                if curr[:n] == word:
-                    res.append(row["title"])
+            filter_key = "genres"
         elif filter == "dirBased":
-            for index, row in self.df.iterrows():
-                curr = row["director"].lower()
-                if curr[:n] == word:
-                    res.append(row["title"])
+            filter_key = "director"
         elif filter == "actorBased":
-            for index, row in self.df.iterrows():
-                curr = row["actors"].lower()
-                if curr[:n] == word:
-                    res.append(row["title"])
+            filter_key = "actors"
         elif filter == "titleBased":
-            for index, row in self.df.iterrows():
-                curr = row["title"].lower()
-                if curr[:n] == word:
-                    res.append(row["title"])
+            filter_key = "title"
         else:
-            n = len(word)
-            res = []
-            word = word.lower()
-            for index, row in self.df.iterrows():
-                curr = row["title"].lower()
-                if curr[:n] == word:
-                    res.append(row["title"])
+            filter_key = "title"
+
+
+        for index, row in self.df.iterrows():
+            curr = row[filter_key].lower()
+            if word in curr:
+                res.append(row["title"])
+
         return res
 
     def results(self, word, filter):
