@@ -39,7 +39,7 @@ class Search:
         return res
 
     def search(self, word, filter):
-        #n = len(word)
+        # n = len(word)
         res = []
         word = word.lower()
         filter_key = ""
@@ -54,7 +54,6 @@ class Search:
             filter_key = "title"
         else:
             filter_key = "title"
-
 
         for index, row in self.df.iterrows():
             curr = row[filter_key].lower()
