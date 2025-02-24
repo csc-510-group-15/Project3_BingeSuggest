@@ -244,25 +244,25 @@
 
 **Class that handles the search feature of the landing page.**
 
-### starts_with(word)
+### search(word, filter)
 
-**Function to check movie prefix**<br/>
-**Input : word/initial character(s);<br/> Output : List of movies having that prefix**<br/>
+**Function to search movie list based off filter**<br/>
+**Input : word/initial character(s);<br/>filter/choice from dropdown<br/> Output : List of movies having that prefix**<br/>
 
 ### anywhere(word, visited_words)
 
 **Function to check visited words**<br/>
 **Input : Word and visited words;<br/> Output : Words that have not been visited**<br/>
 
-### results(word)
+### results(word, filter)
 
-**Function to serve the result render**
-**Input : A word/initial character(s);<br/> Output : All titles starting with the given prompt.**<br/>
+**Function to serve the result render**<br/>
+**Input : A word/initial character(s);<br/>filter/choice from dropdown<br/> Output : All titles starting with the given prompt.**<br/>
 
-### results_top_ten(word)
+### results_top_ten(word, filter)
 
-**Function to get top 10 results**
-**Input : A word/initial character(s);<br/> Output : Top 10 titles starting with the given prompt (taken from [results](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/docs/backend.md#resultsword))**<br/>
+**Function to get top 10 results**<br/>
+**Input : A word/initial character(s);<br/>filter/choice from dropdown<br/> Output : Top 10 titles starting with the given prompt (taken from [results](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/docs/backend.md#resultsword))**<br/>
 
 ## Item_based.py
 
