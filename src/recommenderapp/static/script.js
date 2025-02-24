@@ -48,6 +48,7 @@ $(document).ready(function () {
 					cache: false,
 					data: {
 						q: request.term,
+						filter: document.getElementById("filter") ? document.getElementById("filter").value : "titleBased",
 					},
 					success: function (data) {
 						response(data)

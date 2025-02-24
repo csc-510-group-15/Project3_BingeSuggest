@@ -31,8 +31,9 @@
 #         Test case 1
 #         """
 #         search_word = "toy"
+#         filter = "titleBased"
 #         finder = Search()
-#         filtered_dict = finder.results_top_ten(search_word)
+#         filtered_dict = finder.results_top_ten(search_word, filter)
 #         expected_resp = [
 #             "Toy Story (1995)",
 #             "Toys (1992)",
@@ -52,8 +53,9 @@
 #         Test case 2
 #         """
 #         search_word = "love"
+#         filter = "titleBased"
 #         finder = Search()
-#         filtered_dict = finder.results_top_ten(search_word)
+#         filtered_dict = finder.results_top_ten(search_word, filter)
 #         expected_resp = [
 #             "Love & Human Remains (1993)",
 #             "Love Affair (1994)",
@@ -73,8 +75,9 @@
 #         Test case 3
 #         """
 #         search_word = "gibberish"
+#         filter = "titleBased"
 #         finder = Search()
-#         filtered_dict = finder.results_top_ten(search_word)
+#         filtered_dict = finder.results_top_ten(search_word, filter)
 #         expected_resp = []
 #         self.assertTrue(filtered_dict == expected_resp)
 
@@ -83,6 +86,7 @@
 #         Test case 4
 #         """
 #         search_word = "1995"
+#         filter = "titleBased"
 #         finder = Search()
 #         filtered_dict = finder.results_top_ten(search_word)
 #         expected_resp = [
