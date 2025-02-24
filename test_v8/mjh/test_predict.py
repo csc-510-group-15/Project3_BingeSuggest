@@ -11,6 +11,7 @@ from src.prediction_scripts.item_based import (
     recommend_for_new_user_d,
     recommend_for_new_user_a,
 )
+
 # pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")

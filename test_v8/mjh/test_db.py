@@ -74,6 +74,5 @@ class Tests(unittest.TestCase):
         db.close()
 
 
-
 if __name__ == "__main__":
     unittest.main()
