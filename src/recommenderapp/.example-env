@@ -4,3 +4,4 @@ DB_HOST = 'db'
 DB_NAME = 'PopcornPicksDB'
 
 OMDB_API_KEY = '<your_omdb_api_key>'
+STREAMING_API_KEY = '<your_streaming_api_key>'

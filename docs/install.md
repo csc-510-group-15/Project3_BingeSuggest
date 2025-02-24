@@ -14,6 +14,8 @@
 
     Replace `<your_omdb_api_key>` with your own API key from [OMDb API](http://www.omdbapi.com/).
 
+    Replace '<your_streaming_api_key>' with your own API key from [Movie Of The Night](https://docs.movieofthenight.com/)
+
 ## Step 3: Install docker and docker-compose
 
     You will need to install docker for your system which can be found [here](https://www.docker.com/products/docker-desktop/).

@@ -193,6 +193,45 @@ $(document).ready(function () {
 			});
 	}
 
+	async function fetchStreamingApiKey() {
+		try {
+			const resp = await fetch("/get_api_key_streaming");
+			const data = await resp.json();
+			if (data.apikey) {
+				return data.apikey;
+			} else {
+				console.error("Failed to fetch streaming API key, val is null:", data.error);
+			}
+		} catch (error) {
+			console.error("Error fetching streaming API key:", error);
+		}
+	}
+	let streamingApiKey = null;
+	let streamingApiKeyReady = fetchStreamingApiKey().then(key => {
+		streamingApiKey = key;
+	});
+
+	async function fetchStreamingAvailability(imdbID) {
+		// Wait for API key to be ready before proceeding
+		await streamingApiKeyReady;
+		
+		if (!streamingApiKey) {
+			throw new Error("Streaming API key not available");
+		}
+
+		const response = await fetch("https://streaming-availability.p.rapidapi.com/shows/" + imdbID + "?country=us", {
+			headers: {
+				"X-RapidAPI-Key": streamingApiKey,
+			}
+		});
+		
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		
+		return await response.json();
+	}
+
 	function getUserName(callback) {
 		$.ajax({
 			type: 'GET',
@@ -260,6 +299,7 @@ $(document).ready(function () {
 					var li = $("<li/>")
 					var a = $("<a />").text(element)
 					var movieData;
+					var movieAvailability;
 					try{
 						movieData = await fetchMovieData(imdbID);
 						a
@@ -269,8 +309,31 @@ $(document).ready(function () {
 					} catch(error){
 						console.error(error);
 					}
+
+					//Find what streaming services the movie is available on
+					try{
+						movieAvailability = await fetchStreamingAvailability(imdbID);
+					} catch(error){
+						console.error(error);
+					}
     				var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:150px; height:220px'})				
 					var radios = $(generateRatingOptions(i))
+					var streamingButtons = $("<div/>").addClass("streaming-buttons");
+					if (movieAvailability && movieAvailability.streamingOptions.us) {
+						movieAvailability.streamingOptions.us.forEach((el) => {
+							var streamButton = $("<button/>")
+								.text(el.type + " with " + el.service.name)
+								.addClass("btn btn-outline-primary btn-sm m-1")
+								.attr("href", el.link)
+								.click(function(e) {
+									e.preventDefault(); // Prevent default button behavior
+									// Save current page state before opening new window
+									history.pushState({ page: 'recommendations' }, '', window.location.href);
+									window.open(el.link, '_blank');
+								});
+							streamingButtons.append(streamButton);
+						});
+					}
 
 				  var watchlistButton = $("<button/>")
 				  .text("Add to Watchlist")
@@ -325,9 +388,9 @@ $(document).ready(function () {
 					
 					var leftColumn = null;
 					if (username == "guest" || username == null) {
-						var leftColumn = $("<td width='80%' />").append(li).append(link);// If the user is a guest, don't put radio buttons and wathclist button in the left column
+						var leftColumn = $("<td width='80%' />").append(li).append(link).append(streamingButtons);// If the user is a guest, don't put radio buttons and wathclist button in the left column
 					} else {
-						var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton);// Radio buttons and Watchlist button in the left column
+						var leftColumn = $("<td width='80%' />").append(li).append(link).append(streamingButtons).append(radios).append(watchlistButton).append(watchedHistoryButton);// Radio buttons and Watchlist button in the left column
 					}
 					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
 					row.append(leftColumn).append(rightColumn);
