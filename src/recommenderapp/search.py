@@ -25,8 +25,6 @@ class Search:
     def __init__(self):
         pass
 
-
-
     def anywhere(self, word, visited_words):
         """
         Function to check visited words
@@ -64,7 +62,7 @@ class Search:
             for index, row in self.df.iterrows():
                 curr = row["title"].lower()
                 if curr[:n] == word:
-                  res.append(row["title"])
+                    res.append(row["title"])
         else:
             n = len(word)
             res = []
@@ -74,7 +72,6 @@ class Search:
                 if curr[:n] == word:
                     res.append(row["title"])
         return res
-
 
     def results(self, word, filter):
         """
