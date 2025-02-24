@@ -25,57 +25,7 @@ class Search:
     def __init__(self):
         pass
 
-    def starts_with(self, word):
-        """
-        Function to check movie by title
-        """
-        n = len(word)
-        res = []
-        word = word.lower()
-        for index, row in self.df.iterrows():
-            curr = row["title"].lower()
-            if curr[:n] == word:
-                res.append(row["title"])
-        return res
 
-    def genre_search(self, word):
-        """
-        Function to search movies by genre
-        """
-        n = len(word)
-        res = []
-        word = word.lower()
-        for index, row in self.df.iterrows():
-            curr = row["genres"].lower()
-            if curr[:n] == word:
-                res.append(row["title"])
-        return res
-
-    def director_search(self, word):
-        """
-        Function to check movie by director
-        """
-        n = len(word)
-        res = []
-        word = word.lower()
-        for index, row in self.df.iterrows():
-            curr = row["director"].lower()
-            if curr[:n] == word:
-                res.append(row["title"])
-        return res
-
-    def actor_search(self, word):
-        """
-        Function to check movie by actor
-        """
-        n = len(word)
-        res = []
-        word = word.lower()
-        for index, row in self.df.iterrows():
-            curr = row["actors"].lower()
-            if curr[:n] == word:
-                res.append(row["title"])
-        return res
 
     def anywhere(self, word, visited_words):
         """
@@ -90,20 +40,48 @@ class Search:
                     res.append(x)
         return res
 
+    def search(self, word, filter):
+        n = len(word)
+        res = []
+        word = word.lower()
+
+        if filter == "genreBased":
+            for index, row in self.df.iterrows():
+                curr = row["genres"].lower()
+                if curr[:n] == word:
+                    res.append(row["title"])
+        elif filter == "dirBased":
+            for index, row in self.df.iterrows():
+                curr = row["director"].lower()
+                if curr[:n] == word:
+                    res.append(row["title"])
+        elif filter == "actorBased":
+            for index, row in self.df.iterrows():
+                curr = row["actors"].lower()
+                if curr[:n] == word:
+                    res.append(row["title"])
+        elif filter == "titleBased":
+            for index, row in self.df.iterrows():
+                curr = row["title"].lower()
+                if curr[:n] == word:
+                  res.append(row["title"])
+        else:
+            n = len(word)
+            res = []
+            word = word.lower()
+            for index, row in self.df.iterrows():
+                curr = row["title"].lower()
+                if curr[:n] == word:
+                    res.append(row["title"])
+        return res
+
+
     def results(self, word, filter):
         """
         Function to serve the result render
         """
-        if filter == "genreBased":
-            resp = self.genre_search(word)
-        elif filter == "dirBased":
-            resp = self.director_search(word)
-        elif filter == "actorBased":
-            resp = self.actor_search(word)
-        elif filter == "titleBased":
-            resp = self.starts_with(word)
-        else:
-            resp = self.starts_with(word)
+
+        resp = self.search(word, filter)
         visited_words = set()
         for x in resp:
             visited_words.add(x)
