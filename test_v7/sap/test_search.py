@@ -31,8 +31,9 @@ class Tests(unittest.TestCase):
         Test case 1
         """
         search_word = "runner"
+        filter = "titleBased"
         finder = Search()
-        filtered_dict = finder.results_top_ten(search_word)
+        filtered_dict = finder.results_top_ten(search_word, filter)
         expected_resp = [
             "Runner Runner (2013)",
             "Blade Runner (1982)",
@@ -52,8 +53,9 @@ class Tests(unittest.TestCase):
         Test case 2
         """
         search_word = "love"
+        filter = "titleBased"
         finder = Search()
-        filtered_dict = finder.results_top_ten(search_word)
+        filtered_dict = finder.results_top_ten(search_word, filter)
         expected_resp = [
             "Love & Human Remains (1993)",
             "Love Affair (1994)",
@@ -73,8 +75,9 @@ class Tests(unittest.TestCase):
         Test case 3
         """
         search_word = "gibberish"
+        filter = "titleBased"
         finder = Search()
-        filtered_dict = finder.results_top_ten(search_word)
+        filtered_dict = finder.results_top_ten(search_word, filter)
         expected_resp = []
         self.assertTrue(filtered_dict == expected_resp)
 
