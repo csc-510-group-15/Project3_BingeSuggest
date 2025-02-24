@@ -46,10 +46,11 @@ jobs:
         run: |
           pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. $(git ls-files 'test_*.py')
 
-      - name: Upload results to Codecov
-        uses: codecov/codecov-action@v4
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: CSC-510-Group-5/BingeSuggest
 
       - name: Generate Coverage Badge
         run: |
