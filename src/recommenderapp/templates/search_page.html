@@ -121,9 +121,18 @@ ul {
     align-items: center; 
     margin-top: 12%;
 
+
 }
 
+.button{
 
+     display: inline-block;
+}
+
+.rec_drop{
+
+   display: inline-block;
+ }
 
 
 
@@ -174,13 +183,12 @@ ul {
     </div>
   </div>
 
-
+  <div class = "container">
     <div class="col-md-6 " >
 
-      <div class="form-group">
+        <div class = rec_drop>
         <label for="genres">Choose a Recommendation category:</label>
-
-        <select class="form-control" id="dropdown" placeholder="Select" name="Select" onchange="createButton()">
+        <select class="form-control" id="dropdown" placeholder="Select" name="Select" onchange="createButton()" style="display: inline-block;">
           <option value="" name="Select">Select a category</option>
           <option value="genreBased" name="Genre">Genre</option>
           <option value="dirBased" name="Director">Director</option>
@@ -188,9 +196,13 @@ ul {
           <option value="all" name="All">All</option>
 
         </select>
-      </div>
+          </div>
+      <div class= "button" id="placeholder" style="display: inline-block;"></div>
+    </div>
+
+
       <!-- <label for="genres">Recommend</label> -->
-      <div id="placeholder" ></div>
+
       <!-- <h3>Predict:</h3>
       <input type="button" class="btn btn-light" name="genreBased" id="genreBased" value="genreBased" />
       <input type="button" class="btn btn-light" name="dirBased" id="dirBased" value="dirBased" />
@@ -198,7 +210,10 @@ ul {
       <input type="button" class="btn btn-light" name="all" id="all" value="All" /> -->
 
 
-    </div>
+
+  </div>
+  </div>
+
 
   <div class="container">
     <div class="row">
