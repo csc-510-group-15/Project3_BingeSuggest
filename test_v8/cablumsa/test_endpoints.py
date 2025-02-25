@@ -20,9 +20,9 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"login", response.data)
 
-    #In other test files we have tested that the recommendation algorithms work as expected.
-    #Now, we want to test that the endpoints are outputting that recommendation in the proper format,
-    #with the needed fields
+    # In other test files we have tested that the recommendation algorithms work as expected.
+    # Now, we want to test that the endpoints are outputting that recommendation in the proper format,
+    # with the needed fields
     def test_predict_g(self):
         data = {"movie_list": ["Inception", "The Matrix"]}
         response = self.app.post(
@@ -46,7 +46,7 @@ class TestApp(unittest.TestCase):
             "/genreBased", data=json.dumps(data), content_type="application/json"
         )
         self.assertEqual(response.status_code, 400)
-    
+
     def test_predict_d(self):
         data = {"movie_list": ["Inception", "The Matrix"]}
         response = self.app.post(
@@ -63,7 +63,7 @@ class TestApp(unittest.TestCase):
             "/dirBased", data=json.dumps(data), content_type="application/json"
         )
         self.assertEqual(response.status_code, 400)
-    
+
     def test_predict_a(self):
         data = {"movie_list": ["Inception", "The Matrix"]}
         response = self.app.post(
@@ -91,14 +91,14 @@ class TestApp(unittest.TestCase):
         self.assertIn("genres", response.json)
         self.assertIn("imdb_id", response.json)
 
-    #Ensure that passing an empty list is impossible, and should return an error code
+    # Ensure that passing an empty list is impossible, and should return an error code
     def test_predict_all_invalid(self):
         data = {"movie_list": []}
         response = self.app.post(
             "/all", data=json.dumps(data), content_type="application/json"
         )
         self.assertEqual(response.status_code, 400)
-    
+
     def test_create_account_invalid(self):
         data = {"an_invalid_field": "test"}
         response = self.app.post(
@@ -126,9 +126,9 @@ class TestApp(unittest.TestCase):
             "/guest", data=json.dumps(data), content_type="application/json"
         )
         self.assertEqual(response.status_code, 400)
-    
-    #We need to test that the movie page is rendering
-    #Let's make sure that the movie page works with multiple differemt movies
+
+    # We need to test that the movie page is rendering
+    # Let's make sure that the movie page works with multiple differemt movies
     def test_render_movie(self):
         response = self.app.get("/movie/tt0376994")
         self.assertEqual(response.status_code, 200)
@@ -144,15 +144,15 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Spider-Man", response.data)
 
-    #Now we can test some invalid imdb_ids
+    # Now we can test some invalid imdb_ids
     def test_render_movie_invalid(self):
         response = self.app.get("/movie/tt")
         self.assertEqual(response.status_code, 404)
-    
+
     def test_render_movie_invalid_2(self):
         response = self.app.get("/movie/")
         self.assertEqual(response.status_code, 404)
-    
+
     def test_render_movie_invalid_3(self):
         response = self.app.get("/movie/1")
         self.assertEqual(response.status_code, 404)
