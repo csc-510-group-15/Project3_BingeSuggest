@@ -39,6 +39,12 @@ class Search:
         return res
 
     def search(self, word, filter):
+        """
+        Function for searching movie data and returning results based on input
+        :param word: the keyword to search, the input the user types in the box
+        :param filter: the choice selected in the dropdown next to the textbox
+        :return: title of film matching criteria
+        """
         # n = len(word)
         res = []
         word = word.lower()
@@ -64,7 +70,10 @@ class Search:
 
     def results(self, word, filter):
         """
-        Function to serve the result render
+        Function to get the results from the search
+        :param word: user input from textbox
+        :param filter: choice from dropdown
+        :return: result list
         """
 
         resp = self.search(word, filter)
