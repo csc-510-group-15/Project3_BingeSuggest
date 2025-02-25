@@ -603,7 +603,8 @@ def before_request():
     g.db = mysql.connector.connect(
         user=os.getenv("DB_USER", "root"),
         password=os.getenv("DB_PASSWORD", "root"),
-        host=os.getenv("DB_HOST", "db"),
+        #mysql is the name of the service in the github action config, so add it as default here for testing only
+        host=os.getenv("DB_HOST", "mysql"),
         port=os.getenv("DB_PORT", 3306),
         database=os.getenv("DB_NAME"),
     )
