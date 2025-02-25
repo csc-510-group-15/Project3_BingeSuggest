@@ -1,6 +1,6 @@
 # Functions Description of the backend
 
-## [app.py](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/src/recommenderapp/app.py)
+## [app.py](https://github.com/CSC-510-Group-5/BingeSuggest/blob/v7.0/src/recommenderapp/app.py)
 
 ### login_page()
 
