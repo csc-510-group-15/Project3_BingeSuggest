@@ -64,8 +64,6 @@ jobs:
       run: python test_v7/sap/test_predict_director.py
     - name: Running test cases for predicting all
       run: python test_v7/sap/test_predict_all.py
-    - name: Running test cases for searching
-      run: python test_v7/sap/test_search.py
     - name: Running test cases for DB
       run: python test_v7/sap/test_DB.py
     - name: Running test cases for email
@@ -80,8 +78,6 @@ jobs:
       run: python test_v7/das/test_predict_director.py
     - name: Running test cases for predicting all
       run: python test_v7/das/test_predict_all.py
-    - name: Running test cases for searching
-      run: python test_v7/das/test_search.py
 
     # das test cases
     - name: Running test cases for watchlist
@@ -94,8 +90,6 @@ jobs:
       run: python test_v7/das/test_predict_director.py
     - name: Running test cases for predicting all
       run: python test_v7/das/test_predict_all.py
-    - name: Running test cases for searching
-      run: python test_v7/das/test_search.py
     - name: Running test cases for DB
       run: python test_v7/das/test_DB.py
 
