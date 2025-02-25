@@ -65,8 +65,8 @@ Checkout for project documentation [here](https://github.com/ychen-207523/BingeS
 
 ## Project Presentation Videos
 ### New Features 3 minute demo
-<a href="https://www.youtube.com/watch?v=xm4wda7rA_s" target="_blank">
-  <img src="https://img.youtube.com/vi/xm4wda7rA_s/hqdefault.jpg" alt="BingeSuggest" style="width:600px;"/>
+<a href="https://www.youtube.com/watch?v=Nxew9mdoYSA" target="_blank">
+  <img src="https://img.youtube.com/vi/Nxew9mdoYSA/hqdefault.jpg" alt="BingeSuggest" style="width:600px;"/>
 </a>
 
 ### Why contribute?
