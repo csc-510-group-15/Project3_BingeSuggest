@@ -73,7 +73,7 @@ class Tests(unittest.TestCase):
             "Castle in the Sky (1986)",
             "I Capture the Castle (2003)",
             "Lupin the Third: The Castle of Cagliostro (1979)",
-            "Castle Keep (1969)"
+            "Castle Keep (1969)",
         ]
         self.assertTrue(filtered_dict == expected_resp)
 
@@ -95,11 +95,10 @@ class Tests(unittest.TestCase):
             "Oceans (2009)",
             "Ocean Heaven (2010)",
             "711 Ocean Drive (1950)",
-            "Planet Ocean (2012)"
+            "Planet Ocean (2012)",
         ]
 
         self.assertTrue(filtered_dict == expected_resp)
-
 
     def test_search_title_spindle(self):
         """
@@ -123,8 +122,6 @@ class Tests(unittest.TestCase):
         with pytest.raises(AttributeError):
             finder.results_top_ten(search_word, filter)
 
-
-
     """Test Cases for Genre Based Search"""
 
     def test_search_genre_comedy(self):
@@ -136,16 +133,16 @@ class Tests(unittest.TestCase):
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
         expected_resp = [
-            'Toy Story (1995)',
-            'Grumpier Old Men (1995)',
-            'Waiting to Exhale (1995)',
-            'Father of the Bride Part II (1995)',
-            'Sabrina (1995)',
-            'The American President (1995)',
-            'Dracula: Dead and Loving It (1995)',
-            'Four Rooms (1995)',
-            'Ace Ventura: When Nature Calls (1995)',
-            'Money Train (1995)'
+            "Toy Story (1995)",
+            "Grumpier Old Men (1995)",
+            "Waiting to Exhale (1995)",
+            "Father of the Bride Part II (1995)",
+            "Sabrina (1995)",
+            "The American President (1995)",
+            "Dracula: Dead and Loving It (1995)",
+            "Four Rooms (1995)",
+            "Ace Ventura: When Nature Calls (1995)",
+            "Money Train (1995)",
         ]
 
         self.assertTrue(filtered_dict == expected_resp)
@@ -159,16 +156,16 @@ class Tests(unittest.TestCase):
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
         expected_resp = [
-            'Grumpier Old Men (1995)',
-            'Waiting to Exhale (1995)',
-            'Sabrina (1995)',
-            'The American President (1995)',
-            'Sense and Sensibility (1995)',
-            'Leaving Las Vegas (1995)',
-            'Persuasion (1995)',
-            'Carrington (1995)',
-            'It Takes Two (1995)',
-            'Clueless (1995)'
+            "Grumpier Old Men (1995)",
+            "Waiting to Exhale (1995)",
+            "Sabrina (1995)",
+            "The American President (1995)",
+            "Sense and Sensibility (1995)",
+            "Leaving Las Vegas (1995)",
+            "Persuasion (1995)",
+            "Carrington (1995)",
+            "It Takes Two (1995)",
+            "Clueless (1995)",
         ]
 
         self.assertTrue(filtered_dict == expected_resp)
@@ -182,20 +179,19 @@ class Tests(unittest.TestCase):
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
         expected_resp = [
-            'Waiting to Exhale (1995)',
-            'Heat (1995)',
-            'Tom and Huck (1995)',
-            'The American President (1995)',
-            'Nixon (1995)',
-            'Casino (1995)',
-            'Sense and Sensibility (1995)',
-            'Copycat (1995)',
-            'Powder (1995)',
-            'Leaving Las Vegas (1995)'
+            "Waiting to Exhale (1995)",
+            "Heat (1995)",
+            "Tom and Huck (1995)",
+            "The American President (1995)",
+            "Nixon (1995)",
+            "Casino (1995)",
+            "Sense and Sensibility (1995)",
+            "Copycat (1995)",
+            "Powder (1995)",
+            "Leaving Las Vegas (1995)",
         ]
 
         self.assertTrue(filtered_dict == expected_resp)
-
 
     def test_search_genre_action(self):
         """
@@ -206,16 +202,16 @@ class Tests(unittest.TestCase):
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
         expected_resp = [
-            'Heat (1995)',
-            'Tom and Huck (1995)',
-            'Sudden Death (1995)',
-            'GoldenEye (1995)',
-            'Cutthroat Island (1995)',
-            'Money Train (1995)',
-            'Assassins (1995)',
-            'Dead Presidents (1995)',
-            'Mortal Kombat (1995)',
-            'Guardian Angel (1994)'
+            "Heat (1995)",
+            "Tom and Huck (1995)",
+            "Sudden Death (1995)",
+            "GoldenEye (1995)",
+            "Cutthroat Island (1995)",
+            "Money Train (1995)",
+            "Assassins (1995)",
+            "Dead Presidents (1995)",
+            "Mortal Kombat (1995)",
+            "Guardian Angel (1994)",
         ]
 
         self.assertTrue(filtered_dict == expected_resp)
@@ -232,7 +228,6 @@ class Tests(unittest.TestCase):
         expected_resp = []
         self.assertTrue(filtered_dict == expected_resp)
 
-
         """Test Cases for Director Based Search"""
 
     def test_search_director_forest_whitaker(self):
@@ -243,7 +238,12 @@ class Tests(unittest.TestCase):
         filter = "dirBased"
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
-        expected_resp = ['Waiting to Exhale (1995)', 'Hope Floats (1998)', 'First Daughter (2004)', 'Strapped (1993)']
+        expected_resp = [
+            "Waiting to Exhale (1995)",
+            "Hope Floats (1998)",
+            "First Daughter (2004)",
+            "Strapped (1993)",
+        ]
 
         self.assertTrue(filtered_dict == expected_resp)
 
@@ -255,7 +255,18 @@ class Tests(unittest.TestCase):
         filter = "dirBased"
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
-        expected_resp = ['Money Train (1995)', 'Return to Paradise (1998)', 'Dreamscape (1984)', 'True Believer (1989)', 'The Stepfather (1987)', 'The Good Son (1993)', 'Sleeping with the Enemy (1991)', 'The Forgotten (2004)', 'The Pom Pom Girls (1976)', 'Penthouse North (2013)']
+        expected_resp = [
+            "Money Train (1995)",
+            "Return to Paradise (1998)",
+            "Dreamscape (1984)",
+            "True Believer (1989)",
+            "The Stepfather (1987)",
+            "The Good Son (1993)",
+            "Sleeping with the Enemy (1991)",
+            "The Forgotten (2004)",
+            "The Pom Pom Girls (1976)",
+            "Penthouse North (2013)",
+        ]
 
         self.assertTrue(filtered_dict == expected_resp)
 
@@ -267,10 +278,9 @@ class Tests(unittest.TestCase):
         filter = "dirBased"
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
-        expected_resp = ['Babe (1995)', 'Miss Potter (2006)']
+        expected_resp = ["Babe (1995)", "Miss Potter (2006)"]
 
         self.assertTrue(filtered_dict == expected_resp)
-
 
     def test_search_director_richard_w_munchkin(self):
         """
@@ -280,8 +290,11 @@ class Tests(unittest.TestCase):
         filter = "dirBased"
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
-        expected_resp = ['Guardian Angel (1994)', 'Ring of Fire II: Blood and Steel (1993)', 'Fists of Iron (1995)']
-
+        expected_resp = [
+            "Guardian Angel (1994)",
+            "Ring of Fire II: Blood and Steel (1993)",
+            "Fists of Iron (1995)",
+        ]
 
         self.assertTrue(filtered_dict == expected_resp)
 
@@ -307,7 +320,18 @@ class Tests(unittest.TestCase):
         filter = "actorBased"
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
-        expected_resp = ['Toy Story (1995)', 'Apollo 13 (1995)', 'Forrest Gump (1994)', 'Philadelphia (1993)', 'Sleepless in Seattle (1993)', 'Saving Private Ryan (1998)', "The 'Burbs (1989)", 'Splash (1984)', 'The Money Pit (1986)', 'Nothing in Common (1986)']
+        expected_resp = [
+            "Toy Story (1995)",
+            "Apollo 13 (1995)",
+            "Forrest Gump (1994)",
+            "Philadelphia (1993)",
+            "Sleepless in Seattle (1993)",
+            "Saving Private Ryan (1998)",
+            "The 'Burbs (1989)",
+            "Splash (1984)",
+            "The Money Pit (1986)",
+            "Nothing in Common (1986)",
+        ]
         self.assertTrue(filtered_dict == expected_resp)
 
     def test_search_actor_emma_watson(self):
@@ -318,7 +342,18 @@ class Tests(unittest.TestCase):
         filter = "actorBased"
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
-        expected_resp = ['Harry Potter and the Chamber of Secrets (2002)', 'Harry Potter and the Goblet of Fire (2005)', 'The Tale of Despereaux (2008)', 'Ballet Shoes (2008)', 'Harry Potter and the Deathly Hallows: Part 1 (2010)', 'The Bling Ring (2013)', 'Noah (2014)', 'Regression (2015)', 'Colonia (2016)', 'The Circle (2017)']
+        expected_resp = [
+            "Harry Potter and the Chamber of Secrets (2002)",
+            "Harry Potter and the Goblet of Fire (2005)",
+            "The Tale of Despereaux (2008)",
+            "Ballet Shoes (2008)",
+            "Harry Potter and the Deathly Hallows: Part 1 (2010)",
+            "The Bling Ring (2013)",
+            "Noah (2014)",
+            "Regression (2015)",
+            "Colonia (2016)",
+            "The Circle (2017)",
+        ]
         self.assertTrue(filtered_dict == expected_resp)
 
     def test_search_actor_keanu_reeves(self):
@@ -329,9 +364,19 @@ class Tests(unittest.TestCase):
         filter = "actorBased"
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
-        expected_resp = ['Johnny Mnemonic (1995)', 'A Walk in the Clouds (1995)', 'Little Buddha (1993)', 'Speed (1994)', 'Even Cowgirls Get the Blues (1994)', 'Feeling Minnesota (1996)', 'Chain Reaction (1996)', 'Dracula (1992)', 'The Last Time I Committed Suicide (1997)', 'My Own Private Idaho (1991)']
+        expected_resp = [
+            "Johnny Mnemonic (1995)",
+            "A Walk in the Clouds (1995)",
+            "Little Buddha (1993)",
+            "Speed (1994)",
+            "Even Cowgirls Get the Blues (1994)",
+            "Feeling Minnesota (1996)",
+            "Chain Reaction (1996)",
+            "Dracula (1992)",
+            "The Last Time I Committed Suicide (1997)",
+            "My Own Private Idaho (1991)",
+        ]
         self.assertTrue(filtered_dict == expected_resp)
-
 
     def test_search_actor_tyler_perry(self):
         """
@@ -341,7 +386,18 @@ class Tests(unittest.TestCase):
         filter = "actorBased"
         finder = Search()
         filtered_dict = finder.results_top_ten(search_word, filter)
-        expected_resp = ['Diary of a Mad Black Woman (2005)', "Madea's Family Reunion (2006)", 'Why Did I Get Married? (2007)', 'Madea Goes to Jail (2009)', 'Meet the Browns (2008)', 'I Can Do Bad All By Myself (2009)', 'Why Did I Get Married Too? (2010)', "Madea's Witness Protection (2012)", 'Alex Cross (2012)', 'Gone Girl (2014)']
+        expected_resp = [
+            "Diary of a Mad Black Woman (2005)",
+            "Madea's Family Reunion (2006)",
+            "Why Did I Get Married? (2007)",
+            "Madea Goes to Jail (2009)",
+            "Meet the Browns (2008)",
+            "I Can Do Bad All By Myself (2009)",
+            "Why Did I Get Married Too? (2010)",
+            "Madea's Witness Protection (2012)",
+            "Alex Cross (2012)",
+            "Gone Girl (2014)",
+        ]
         self.assertTrue(filtered_dict == expected_resp)
 
     def test_search_actor_queen_elizabeth(self):
@@ -355,7 +411,6 @@ class Tests(unittest.TestCase):
         filtered_dict = finder.results_top_ten(search_word, filter)
         expected_resp = []
         self.assertTrue(filtered_dict == expected_resp)
-
 
 
 if __name__ == "__main__":
