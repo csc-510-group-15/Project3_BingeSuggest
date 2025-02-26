@@ -106,3 +106,11 @@ jobs:
       env:
           OMDB_API_KEY: "${{secrets.OMDB_API_KEY}}"
       run: python test_v8/cablumsa/test_endpoints.py
+    - name: Running test cases for database operations
+      run: python test_v8/mjh/test_db.py
+    - name: Running test cases for prediction
+      run: python test_v8/mjh/test_predict.py
+    - name: Running test cases for search
+      run: python test_v8/mjh/test_search.py
+    - name: Running additional test cases for search
+      run: python test_v8/gckoonts/test_search.py
