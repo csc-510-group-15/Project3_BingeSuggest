@@ -13,9 +13,7 @@ import warnings
 from pathlib import Path
 
 import pytest
-from pytest import raises
 
-from pkg_resources import non_empty_lines
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 # pylint: disable=wrong-import-position
