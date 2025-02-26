@@ -21,6 +21,7 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -43,6 +44,8 @@ jobs:
           mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
 
       - name: Run tests and generate coverage report
+        env:
+          OMDB_API_KEY: "${{secrets.OMDB_API_KEY}}"
         run: |
           pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. $(git ls-files 'test_*.py')
 
