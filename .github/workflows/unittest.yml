@@ -98,3 +98,9 @@ jobs:
       run: python test_v7/watchedHistory/test_add_to_watched_history.py
     - name: Running test cases for removing from watched history
       run: python test_v7/watchedHistory/test_remove_from_watched_history.py
+
+    # test cases for v8
+    - name: Running test cases for new search
+      run: python test_v8/gckoonts/test_search.py
+    - name: Running test cases for page rendering and endpoints
+      run: python test_v8/cablumsa/test_endpoints.py
