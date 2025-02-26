@@ -230,7 +230,7 @@ Please refer to the [CONTRIBUTING.md](https://github.com/ychen-207523/BingeSugge
 </table>
 
 ## Contact
-In case of any issues, please e-mail your queries to svijaytidke@gmail.com or raise an issue on this repository.<br>
+In case of any issues, please e-mail your queries to cablumsa@ncsu.edu or raise an issue on this repository.<br>
 Our team of developers monitors this e-mail address and would be happy to answer any and all questions you have about setup or use of this project!
 
 ## Join the BingeSuggest Community:
