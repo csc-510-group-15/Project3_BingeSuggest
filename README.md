@@ -1,19 +1,18 @@
 # <i> BingeSuggest🍿: Your Destination for Movie Recommendations </i>
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/ychen-207523/BingeSuggest/graphs/commit-activity)
-[![Contributors Activity](https://img.shields.io/github/commit-activity/m/ychen-207523/BingeSuggest)](https://github.com/ychen-207523/BingeSuggest/pulse)
-[![GitHub issues](https://img.shields.io/github/issues/ychen-207523/BingeSuggest.svg)](https://github.com/ychen-207523/BingeSuggest/issues?q=is%3Aopen+is%3Aissue)
-[![GitHub issues-closed](https://img.shields.io/github/issues-closed/ychen-207523/BingeSuggest.svg)](https://github.com/ychen-207523/BingeSuggest/issues?q=is%3Aissue+is%3Aclosed)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/CSC-510-Group-5/BingeSuggest/graphs/commit-activity)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/CSC-510-Group-5/BingeSuggest)](https://github.com/CSC-510-Group-5/BingeSuggest/pulse)
+[![GitHub issues](https://img.shields.io/github/issues/CSC-510-Group-5/BingeSuggest)](https://github.com/CSC-510-Group-5/BingeSuggest/issues)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/CSC-510-Group-5/BingeSuggest.svg)](https://github.com/CSC-510-Group-5/BingeSuggest/issues?q=is%3Aissue+is%3Aclosed)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://github.com/ychen-207523/BingeSuggest/blob/main/LICENSE)
-[![Unittest](https://github.com/ychen-207523/BingeSuggest/actions/workflows/unittest.yml/badge.svg?branch=main&event=push)](https://github.com/ychen-207523/BingeSuggest/actions/workflows/unittest.yml)
-[![codecov](https://codecov.io/gh/ychen-207523/BingeSuggest/graph/badge.svg?token=8YwugvrJ0K)](https://codecov.io/gh/ychen-207523/BingeSuggest) 
-[![GitHub release](https://img.shields.io/github/release/ychen-207523/BingeSuggest.svg)](https://github.com/ychen-207523/BingeSuggest/releases)
-[![StyleCheck: Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/ychen-207523/BingeSuggest/actions/workflows/pylint.yml)
-![GitHub contributors](https://img.shields.io/github/contributors/ychen-207523/BingeSuggest)
-![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/ychen-207523/BingeSuggest)
-![GitHub repo size](https://img.shields.io/github/repo-size/ychen-207523/BingeSuggest)
-[![Black](https://github.com/ychen-207523/BingeSuggest/actions/workflows/black.yml/badge.svg)](https://github.com/ychen-207523/BingeSuggest/actions/workflows/black.yml)
-[![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/ychen-207523/BingeSuggest/bug?color=green&label=Squished%20bugs)](https://github.com/ychen-207523/BingeSuggest/issues?q=is%3Aissue+label%3Abug+is%3Aclosed)
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://github.com/CSC-510-Group-5/BingeSuggest/blob/main/LICENSE)
+[![Unittest](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/unittest.yml/badge.svg?branch=main&event=push)](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/unittest.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/CSC-510-Group-5/BingeSuggest)](https://codecov.io/gh/CSC-510-Group-5/BingeSuggest) 
+[![StyleCheck: Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/pylint.yml)
+![GitHub contributors](https://img.shields.io/github/contributors/CSC-510-Group-5/BingeSuggest)
+![GitHub Release Date - Published_At](https://img.shields.io/badge/release_date-February_25-blue)
+![GitHub repo size](https://img.shields.io/github/repo-size/CSC-510-Group-5/BingeSuggest)
+[![Black](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/black.yml/badge.svg)](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/black.yml)
+[![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/CSC-510-Group-5/BingeSuggest/bug?color=green&label=Squished%20bugs)](https://github.com/CSC-510-Group-5/BingeSuggest/issues?q=is%3Aissue+label%3Abug+is%3Aclosed)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14219839.svg)](https://doi.org/10.5281/zenodo.14219839)
   
 <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/header_display.png" alt="BingeSuggest" style="width:1000px;"/>
@@ -21,7 +20,7 @@
 
 # Contents  
 
-- [Why use BingeSuggest?](#why-use-popcornpicks)
+- [Why use BingeSuggest?](#why-use-bingesuggest)
 - [Project Documentation](#documentation)
 - [Project Presentation Videos](#project-presentation-video)
 - [Brief Overview of Project](#project-description)
@@ -63,10 +62,10 @@ BingeSuggest: Your movie recommender! Input movies, get tailored suggestions, an
 ## Documentation
 Checkout for project documentation [here](https://github.com/ychen-207523/BingeSuggest/tree/main/docs)
 
-## Project Presentation Videos
+## Project Presentation Video
 ### New Features 3 minute demo
-<a href="https://www.youtube.com/watch?v=xm4wda7rA_s" target="_blank">
-  <img src="https://img.youtube.com/vi/xm4wda7rA_s/hqdefault.jpg" alt="BingeSuggest" style="width:600px;"/>
+<a href="https://www.youtube.com/watch?v=Nxew9mdoYSA" target="_blank">
+  <img src="https://img.youtube.com/vi/Nxew9mdoYSA/hqdefault.jpg" alt="BingeSuggest" style="width:600px;"/>
 </a>
 
 ### Why contribute?
@@ -133,10 +132,8 @@ View our autogenerated doco here [Doco](https://github.com/ychen-207523/BingeSug
 **The user can interact with other users, by viewing a community sourced wall of recent moview reviews**
 <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/wall.gif" width="600" height="375">
 
-## Project 7 Delta
-Check out the significant changes that we made for Project 7 [here](https://github.com/ychen-207523/BingeSuggest/blob/main/proj7/Proj7Changes.md)
-
-Our grading scorecard can be found [here](https://github.com/ychen-207523/BingeSuggest/blob/main/proj7/README.md)
+## Version 8 Delta
+Check out the significant changes that we made for Version 8 [here](https://github.com/ychen-207523/BingeSuggest/blob/main/version8/V8Changes.md)
 
 ## Tech stack Used👨‍💻:
 
@@ -178,19 +175,28 @@ Our grading scorecard can be found [here](https://github.com/ychen-207523/BingeS
 ## Future Scope
 BingeSuggest is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
-1. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
-  
-2. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
- 
-3. **Frontend rework**: Currently the frontend uses jquery, which is a bit dated. As the program becomes more complex, it may be nice to use a component based architecture such as React, Angular, or Blazor.
+1. **Improve application performance**: Update the applications recommendation feature and page navigation to avoid unnecessary backend calls
 
-The future of BingeSuggest is full of potential, and we invite developers, movie lovers, and anyone passionate about cinema to join us in making this platform the ultimate movie companion. 
+2. **Google OAuth Login**: Allow users to log in with their existing google accounts
+
+3. **Improve application security**: Remove API calls that return the backend services API keys to the frontend
+
+4. **Include more recommendations**: Add additional features to recommend movies based on
 
 ## Contribute to the Project!
 
 Please refer to the [CONTRIBUTING.md](https://github.com/ychen-207523/BingeSuggest/blob/main/CONTRIBUTING.md) if you want to contribute to the BingeSuggest source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️!
 
 ## Contributors
+<table>
+  <tr>
+    <td><a href="https://github.com/svd-ncsu/BingeSuggest">Version 8</a></td>
+    <td align="center"><a href="https://github.com/Connorblu"><img src=https://avatars.githubusercontent.com/u/63871157?v=4" width="75px;" alt=""/><br /><sub><b>Connor Blumsack</b></sub></a></td>
+    <td align="center"><a href="https://github.com/nivag1288"><img src="https://avatars.githubusercontent.com/u/46654158?v=4" width="75px;" alt=""/><br /><sub><b>Gavin Koonts</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/masonhorne"><img src="https://avatars.githubusercontent.com/u/71307091?v=4" width="75px;" alt=""/><br /><sub><b>Mason Horne</b></sub></a><br /></td>
+  </tr>
+</table>
+
 <table>
   <tr>
     <td><a href="https://github.com/svd-ncsu/BingeSuggest">Version 7</a></td>

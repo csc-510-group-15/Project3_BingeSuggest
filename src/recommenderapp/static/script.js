@@ -48,6 +48,7 @@ $(document).ready(function () {
 					cache: false,
 					data: {
 						q: request.term,
+						filter: document.getElementById("filter") ? document.getElementById("filter").value : "titleBased",
 					},
 					success: function (data) {
 						response(data)
@@ -177,7 +178,7 @@ $(document).ready(function () {
 		return new Promise(function(resolve, reject){
 			$.ajax({
 				type: 'GET',
-				url: 'http://www.omdbapi.com/',
+				url: 'https://www.omdbapi.com/',
 				dataType: 'json',
 				data: {
 					i: imdbID,

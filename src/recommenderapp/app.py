@@ -122,7 +122,11 @@ def predict_g():
     Predicts movie recommendations based on user ratings.
     """
     data = json.loads(request.data)
+    if "movie_list" not in data:
+        return jsonify({"error": "no movie list provided"}), 400
     data1 = data["movie_list"]
+    if not data1:
+        return jsonify({"error": "No movies provided"}), 400
     training_data = []
     for movie in data1:
         movie_with_rating = {"title": movie, "rating": 5.0}
@@ -141,7 +145,11 @@ def predict_d():
     Predicts movie recommendations based on user ratings.
     """
     data = json.loads(request.data)
+    if "movie_list" not in data:
+        return jsonify({"error": "no movie list provided"}), 400
     data1 = data["movie_list"]
+    if not data1:
+        return jsonify({"error": "No movies provided"}), 400
     training_data = []
     for movie in data1:
         movie_with_rating = {"title": movie, "rating": 5.0}
@@ -159,7 +167,11 @@ def predict_a():
     Predicts movie recommendations based on user ratings.
     """
     data = json.loads(request.data)
+    if "movie_list" not in data:
+        return jsonify({"error": "no movie list provided"}), 400
     data1 = data["movie_list"]
+    if not data1:
+        return jsonify({"error": "No movies provided"}), 400
     training_data = []
     for movie in data1:
         movie_with_rating = {"title": movie, "rating": 5.0}
@@ -177,7 +189,11 @@ def predict_all():
     Predicts movie recommendations based on user ratings.
     """
     data = json.loads(request.data)
+    if "movie_list" not in data:
+        return jsonify({"error": "no movie list provided"}), 400
     data1 = data["movie_list"]
+    if not data1:
+        return jsonify({"error": "No movies provided"}), 400
     training_data = []
     for movie in data1:
         movie_with_rating = {"title": movie, "rating": 5.0}
@@ -195,8 +211,9 @@ def search():
     Handles movie search requests.
     """
     term = request.form["q"]
+    filter_term = request.form["filter"]
     finder = Search()
-    filtered_dict = finder.results_top_ten(term)
+    filtered_dict = finder.results_top_ten(term, filter_term)
     resp = jsonify(filtered_dict)
     resp.status_code = 200
     return resp
@@ -208,6 +225,8 @@ def create_acc():
     Handles creating a new account
     """
     data = json.loads(request.data)
+    if not "email" in data or not "username" in data or not "password" in data:
+        return jsonify({"error": "no email, username, or password provided"}), 400
     create_account(g.db, data["email"], data["username"], data["password"])
     return request.data
 
@@ -250,6 +269,8 @@ def guest():
     Sets the user to be a guest user
     """
     data = json.loads(request.data)
+    if "guest" not in data:
+        return jsonify({"error": "invalid guest request"}), 400
     user[1] = data["guest"]
     return request.data
 
@@ -334,7 +355,6 @@ def add_movie_to_watchlist():
     """
     Adds a movie to the user's watchlist.
     """
-    print("Entered func")
     data = request.get_json()
     print(data)
     movie_name = data.get("movieName")
@@ -549,6 +569,9 @@ def moviePage(id):
     r = requests.get(
         "http://www.omdbapi.com/", params={"i": id, "apikey": os.getenv("OMDB_API_KEY")}
     )
+    resp = r.json()
+    if "Error" in resp:
+        return jsonify({"error": "Movie not found"}), 404
     data = {"movieData": r.json(), "user": us}
     return render_template("movie.html", data=data)
 
@@ -578,9 +601,10 @@ def before_request():
     """
     load_dotenv()
     g.db = mysql.connector.connect(
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER", "root"),
+        password=os.getenv("DB_PASSWORD", "root"),
+        # mysql is the name of the service in the github action config, so add it as default here for testing only
+        host=os.getenv("DB_HOST", "127.0.0.1"),
         port=os.getenv("DB_PORT", 3306),
         database=os.getenv("DB_NAME"),
     )

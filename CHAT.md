@@ -1,6 +1,7 @@
 # PopcornPicks Developers Chat
 
-<img src="https://github.com/brwali/PopcornPicks/blob/master/asset/popcornpicks.png" width="1000">
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/044f9d18-8804-4539-b8b1-c1124b69179d" />
+
 This is a screenshot of what our developers' communication channel looks like.
 
 ## Means of Communication

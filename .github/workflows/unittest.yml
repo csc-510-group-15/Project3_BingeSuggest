@@ -64,8 +64,6 @@ jobs:
       run: python test_v7/sap/test_predict_director.py
     - name: Running test cases for predicting all
       run: python test_v7/sap/test_predict_all.py
-    - name: Running test cases for searching
-      run: python test_v7/sap/test_search.py
     - name: Running test cases for DB
       run: python test_v7/sap/test_DB.py
     - name: Running test cases for email
@@ -80,8 +78,6 @@ jobs:
       run: python test_v7/das/test_predict_director.py
     - name: Running test cases for predicting all
       run: python test_v7/das/test_predict_all.py
-    - name: Running test cases for searching
-      run: python test_v7/das/test_search.py
 
     # das test cases
     - name: Running test cases for watchlist
@@ -94,8 +90,6 @@ jobs:
       run: python test_v7/das/test_predict_director.py
     - name: Running test cases for predicting all
       run: python test_v7/das/test_predict_all.py
-    - name: Running test cases for searching
-      run: python test_v7/das/test_search.py
     - name: Running test cases for DB
       run: python test_v7/das/test_DB.py
 
@@ -104,3 +98,19 @@ jobs:
       run: python test_v7/watchedHistory/test_add_to_watched_history.py
     - name: Running test cases for removing from watched history
       run: python test_v7/watchedHistory/test_remove_from_watched_history.py
+
+    # test cases for v8
+    - name: Running test cases for new search
+      run: python test_v8/gckoonts/test_search.py
+    - name: Running test cases for page rendering and endpoints
+      env:
+          OMDB_API_KEY: "${{secrets.OMDB_API_KEY}}"
+      run: python test_v8/cablumsa/test_endpoints.py
+    - name: Running test cases for database operations
+      run: python test_v8/mjh/test_db.py
+    - name: Running test cases for prediction
+      run: python test_v8/mjh/test_predict.py
+    - name: Running test cases for search
+      run: python test_v8/mjh/test_search.py
+    - name: Running additional test cases for search
+      run: python test_v8/gckoonts/test_search.py

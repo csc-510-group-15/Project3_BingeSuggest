@@ -1,7 +1,7 @@
 ## Movie Recommendation Mechanism
 **The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
   
-<img src=https://github.com/ychen-207523/BingeSuggest/blob/v7.0/asset/recommend_mechanism.gif" width="600" height="375">
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/v7.0/asset/recommend_mechanism.gif" width="600" height="375">
 
 ## Email Notifier
 **The user sends his/her movies feedback via an email (Notify Me button)**
