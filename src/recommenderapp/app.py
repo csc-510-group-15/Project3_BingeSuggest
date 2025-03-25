@@ -10,11 +10,12 @@ This code is licensed under MIT license (see LICENSE for details)
 import json
 import sys
 import os
+import logging
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 import mysql.connector
 import requests
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 sys.path.append("../../")
 from src.recommenderapp.utils import (
@@ -599,7 +600,9 @@ def before_request():
     """
     Opens the db connection.
     """
-    load_dotenv()
+    env_path = find_dotenv()
+    # print(f"Found .env file at: {env_path}")
+    load_dotenv(env_path, override=True)
     g.db = mysql.connector.connect(
         user=os.getenv("DB_USER", "root"),
         password=os.getenv("DB_PASSWORD", "root"),
@@ -607,6 +610,7 @@ def before_request():
         host=os.getenv("DB_HOST", "127.0.0.1"),
         port=os.getenv("DB_PORT", 3306),
         database=os.getenv("DB_NAME"),
+        # auth_plugin='caching_sha2_password'
     )
 
 
