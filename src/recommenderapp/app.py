@@ -11,6 +11,7 @@ import json
 import sys
 import os
 import logging
+import requests
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 import mysql.connector
@@ -595,6 +596,40 @@ def postCommentOnMovieDisccusion(id):
     return create_or_update_discussion(g.db, data)
 
 
+@app.route("/news")
+def news_feed():
+    """
+    Fetches and displays movie-related news articles.
+    """
+    # Get the API key from the environment
+    news_api_key = os.getenv("NEWS_API_KEY")
+    if not news_api_key:
+        return jsonify({"error": "News API key not set"}), 500
+
+    # Define the API endpoint and parameters
+    # Here we use NewsAPI.org as an example; adjust the query as needed.
+    url = "https://newsapi.org/v2/everything"
+    params = {
+        "q": "movie OR film",  # Query for movie or film-related news
+        "language": "en",
+        "sortBy": "publishedAt",
+        "apiKey": news_api_key,
+        "pageSize": 10  # Limit to 10 articles; adjust as needed
+    }
+
+    # Make the API request
+    response = requests.get(url, params=params)
+    if response.status_code != 200:
+        return jsonify({"error": "Failed to fetch news"}), 500
+
+    news_data = response.json()
+    # Extract articles from the API response
+    articles = news_data.get("articles", [])
+
+    # Pass articles to the news.html template
+    return render_template("news.html", articles=articles)
+
+
 @app.before_request
 def before_request():
     """
@@ -624,4 +659,4 @@ def after_request(response):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5010, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

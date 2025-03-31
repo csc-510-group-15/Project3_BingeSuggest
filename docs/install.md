@@ -8,7 +8,17 @@
   
     https://github.com/CSC-510-Group-5/BingeSuggest
 
-### Step 2: Setup up environment variables
+## Step 2: MySQL Install
+   Download and Install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) 
+
+## Step 3: Setting up MySQL Workbench
+ 1. Launch MySQL Workbench
+ 2. Under MySQL Connections, Right click in the whitespace. Select `Rescan for Local MySQL Instances`. It should detect the server established in the previous step.
+ 3. Select the discovered Local instance and enter your password if created in server setup.
+ 4. Click `File` > `Open SQL Script` then select `init.sql` in the `PopcornPicks/src` directory. This will create the tables required for the application's persistence.
+ 5. Repeat above step for `movies.sql` file located in the `PopcornPicks/src` directory. This may take a few minutes.
+
+## Step 4: Setup up environment variables
 
     Copy the .example-env file located at `src/recommenderapp/.example-env` into a new `.env` file located in the same directory.
 
@@ -16,7 +26,9 @@
 
     Replace '<your_streaming_api_key>' with your own API key from [Movie Of The Night](https://docs.movieofthenight.com/)
 
-## Step 3: Install docker and docker-compose
+    Replace '<your_news_api_key>' with your own API key follow this [guide](https://newsapi.org/) 
+
+## Step 5: Install docker and docker-compose
 
     You will need to install docker for your system which can be found [here](https://www.docker.com/products/docker-desktop/).
 
@@ -26,11 +38,11 @@
     docker-compose --version
     ```
 
-## Step 4: Starting the application
+## Step 6: Starting the application
 
     The application can be started by running `docker-compose up --build` from the root of the project directory.
 
-## Step 5: Open the URL in your browser 
+## Step 7: Open the URL in your browser 
 
       http://127.0.0.1:5001/
 

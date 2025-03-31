@@ -5,3 +5,4 @@ DB_NAME = 'PopcornPicksDB'
 
 OMDB_API_KEY = '<your_omdb_api_key>'
 STREAMING_API_KEY = '<your_streaming_api_key>'
+NEWS_API_KEY = "<your_news_api_key>"
