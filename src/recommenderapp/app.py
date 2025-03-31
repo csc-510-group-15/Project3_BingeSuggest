@@ -225,14 +225,16 @@ def search():
 @app.route("/", methods=["POST"])
 def create_acc():
     """
-    Handles creating a new account
+    Handles creating a new account.
     """
     data = json.loads(request.data)
-    if not "email" in data or not "username" in data or not "password" in data:
-        return jsonify({"error": "no email, username, or password provided"}), 400
-    create_account(g.db, data["email"], data["username"], data["password"])
+    if not ("email" in data and "username" in data and "password" in data):
+        return jsonify({"error": "No email, username, or password provided"}), 400
+    try:
+        create_account(g.db, data["email"], data["username"], data["password"])
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
     return request.data
-
 
 @app.route("/out", methods=["POST"])
 def signout():
@@ -603,7 +605,7 @@ def news_feed():
     if not news_api_key:
         return jsonify({"error": "News API key not set"}), 500
 
-    page_size = 12  # You can adjust this value as needed
+    page_size = 9  # You can adjust this value as needed
     # Get page number from request arguments; default to page 1.
     page = int(request.args.get("page", 1))
 
@@ -630,6 +632,8 @@ def news_feed():
 
     return render_template("news.html", articles=articles, current_page=page, total_pages=total_pages)
 
+import html  # Add this import at the top with your other imports
+
 @app.route("/quiz")
 def quiz_page():
     """
@@ -653,9 +657,10 @@ def quiz_page():
     # Process questions: combine incorrect_answers with correct_answer and shuffle them.
     processed_questions = []
     for q in questions:
-        question_text = q.get("question")
-        correct_answer = q.get("correct_answer")
-        incorrect_answers = q.get("incorrect_answers")
+        # Unescape HTML entities
+        question_text = html.unescape(q.get("question"))
+        correct_answer = html.unescape(q.get("correct_answer"))
+        incorrect_answers = [html.unescape(ans) for ans in q.get("incorrect_answers")]
         options = incorrect_answers + [correct_answer]
         random.shuffle(options)
         processed_questions.append({
@@ -667,11 +672,11 @@ def quiz_page():
     session['quiz_questions'] = processed_questions
     return render_template("quiz.html", questions=processed_questions)
 
-
 @app.route("/quiz/submit", methods=["POST"])
 def quiz_submit():
     """
-    Processes quiz submission, calculates the user's score, updates quiz points, and returns the result.
+    Processes quiz submission, calculates the user's score, and returns the result including
+    the correct answers for each question.
     """
     data = request.get_json()
     user_answers = data.get("answers", {})
@@ -683,30 +688,20 @@ def quiz_submit():
 
     score = 0
     total = len(questions)
+    correct_answers = []
     for idx, q in enumerate(questions):
         correct = q.get("correct_answer")
+        correct_answers.append(correct)
         if str(idx) in user_answers and user_answers[str(idx)] == correct:
             score += 1
 
-    # Update user's quiz points if logged in (assuming user[1] holds user id)
-    user_id = user[1]  # Replace with your user session logic
-    if user_id and user_id != "guest":
-        update_quiz_points(g.db, user_id, score)
-
-    result = {"score": score, "total": total, "correct_answers": [q.get("correct_answer") for q in questions] }
+    # Return the result without updating quiz points
+    result = {
+        "score": score,
+        "total": total,
+        "correct_answers": correct_answers
+    }
     return jsonify(result), 200
-
-
-def update_quiz_points(db, user_id, score):
-    """
-    Updates the quiz_points column in the Users table by adding the given score.
-    Assumes the Users table has a column named quiz_points.
-    """
-    cursor = db.cursor()
-    query = "UPDATE Users SET quiz_points = COALESCE(quiz_points, 0) + %s WHERE idUsers = %s"
-    cursor.execute(query, (score, user_id))
-    db.commit()
-
 
 @app.before_request
 def before_request():

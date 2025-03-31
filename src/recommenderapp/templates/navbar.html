@@ -1,48 +1,45 @@
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark topNavBar fixed-top" data-bs-theme="dark" id="landingTopNav">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#" id="backToLanding" onclick="backToLandingPage()">BingeSuggest🍿</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/landing" id="backToLanding">BingeSuggest🍿</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" 
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
       
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="getStartedNav" onclick="getStarted()">Get Recommendations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="goToWallNav" onclick="goToWall()">Movie Wall</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="goToReviewNav" onclick="goToReview()">Review a movie</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/news" id="newsNav">Movie News</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/quiz">Movie Quiz</a>
-          </li>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <!-- Replace onclick functions with direct href links -->
+        <li class="nav-item">
+          <a class="nav-link" href="/search_page" id="getStartedNav">Get Recommendations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/wall" id="goToWallNav">Movie Wall</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/review" id="goToReviewNav">Review a Movie</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/news" id="newsNav">Movie News</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/quiz">Movie Quiz</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown" id="profileList">
+          <a class="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Profile
+          </a>
+          <ul class="dropdown-menu" style="margin-right:20%;">
+            <li><a class="dropdown-item" href="/profile" id="goToProfileNav">My Profile</a></li>
+            <li><a class="dropdown-item" href="/watchlist" id="goToWatchlist">My Watchlist</a></li>
+            <li><a class="dropdown-item" href="/watched_history" id="goToWatchedHistory">My Watched History</a></li>
+            <li><a class="dropdown-item" href="/signout" id="signOut">Sign out</a></li>
           </ul>
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item dropdown" id="profileList">
-              <a class="nav-link me-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Profile
-              </a>
-              <!-- <a class="nav-link me-3" href="#">Home</a> -->
-              <ul class="dropdown-menu" style="margin-right:20%;">
-                <li><a class="dropdown-item" href="#" id="goToProfileNav" onclick="goToProfile()">My Profile</a></li>
-                <li><a class="dropdown-item" href="#" id="goToWatchlist" onclick="goToWatchlist()">My Watchlist</a></li>
-                <li><a class="dropdown-item" href="#" id="goToWatchedHistory" onclick="goToWatchedHistory()">My Watched History</a></li>
-                <li><a class="dropdown-item" href="#" id="signOut" onclick="signOut()">Sign out</a></li>
-              </ul>
-            </li>
-          </ul>
-          
-        
-      </div>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>

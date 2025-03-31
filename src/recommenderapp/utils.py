@@ -15,6 +15,7 @@ import bcrypt
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from mysql.connector.errors import IntegrityError
 from flask import jsonify
 import json
 
@@ -193,20 +194,25 @@ def send_email_to_user(recipient_email, categorized_data):
     finally:
         server.quit()
 
-
 def create_account(db, email, username, password):
     """
-    Utility function for creating an account
+    Utility function for creating an account.
+    Raises an exception with a friendly error message if the username already exists.
     """
     executor = db.cursor()
     new_pass = password.encode("utf-8")
     h = bcrypt.hashpw(new_pass, bcrypt.gensalt())
-    executor.execute(
-        "INSERT INTO Users(username, email, password) VALUES (%s, %s, %s);",
-        (username, email, h),
-    )
-    db.commit()
-
+    try:
+        executor.execute(
+            "INSERT INTO Users(username, email, password) VALUES (%s, %s, %s);",
+            (username, email, h),
+        )
+        db.commit()
+    except IntegrityError as e:
+        if e.errno == 1062:  # Duplicate entry error code for MySQL
+            raise Exception("Username already exists. Please choose a different username.")
+        else:
+            raise
 
 def add_friend(db, username, user_id):
     """
