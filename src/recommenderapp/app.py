@@ -12,7 +12,8 @@ import sys
 import os
 import logging
 import requests
-from flask import Flask, jsonify, render_template, request, g
+import random
+from flask import Flask, jsonify, render_template, request, g, render_template, jsonify, session
 from flask_cors import CORS
 import mysql.connector
 import requests
@@ -598,36 +599,113 @@ def postCommentOnMovieDisccusion(id):
 
 @app.route("/news")
 def news_feed():
-    """
-    Fetches and displays movie-related news articles.
-    """
-    # Get the API key from the environment
     news_api_key = os.getenv("NEWS_API_KEY")
     if not news_api_key:
         return jsonify({"error": "News API key not set"}), 500
 
-    # Define the API endpoint and parameters
-    # Here we use NewsAPI.org as an example; adjust the query as needed.
+    page_size = 12  # You can adjust this value as needed
+    # Get page number from request arguments; default to page 1.
+    page = int(request.args.get("page", 1))
+
     url = "https://newsapi.org/v2/everything"
     params = {
-        "q": "movie OR film",  # Query for movie or film-related news
+        "q": "movie OR film",
         "language": "en",
         "sortBy": "publishedAt",
         "apiKey": news_api_key,
-        "pageSize": 10  # Limit to 10 articles; adjust as needed
+        "pageSize": page_size,
+        "page": page
     }
 
-    # Make the API request
     response = requests.get(url, params=params)
     if response.status_code != 200:
         return jsonify({"error": "Failed to fetch news"}), 500
 
     news_data = response.json()
-    # Extract articles from the API response
     articles = news_data.get("articles", [])
+    total_results = news_data.get("totalResults", 0)
 
-    # Pass articles to the news.html template
-    return render_template("news.html", articles=articles)
+    # Calculate total pages (round up)
+    total_pages = (total_results + page_size - 1) // page_size
+
+    return render_template("news.html", articles=articles, current_page=page, total_pages=total_pages)
+
+@app.route("/quiz")
+def quiz_page():
+    """
+    Fetches movie trivia questions from Open Trivia DB (Entertainment: Film) and renders the quiz page.
+    """
+    url = "https://opentdb.com/api.php"
+    params = {
+        "amount": 10,
+        "category": 11,  # Entertainment: Film
+        "type": "multiple"
+    }
+    response = requests.get(url, params=params)
+    if response.status_code != 200:
+        return jsonify({"error": "Failed to fetch quiz questions"}), 500
+
+    data = response.json()
+    if data.get("response_code") != 0:
+        return jsonify({"error": "API returned an error code"}), 500
+
+    questions = data.get("results", [])
+    # Process questions: combine incorrect_answers with correct_answer and shuffle them.
+    processed_questions = []
+    for q in questions:
+        question_text = q.get("question")
+        correct_answer = q.get("correct_answer")
+        incorrect_answers = q.get("incorrect_answers")
+        options = incorrect_answers + [correct_answer]
+        random.shuffle(options)
+        processed_questions.append({
+            "question": question_text,
+            "options": options,
+            "correct_answer": correct_answer
+        })
+    # Store the processed questions in the session for later verification
+    session['quiz_questions'] = processed_questions
+    return render_template("quiz.html", questions=processed_questions)
+
+
+@app.route("/quiz/submit", methods=["POST"])
+def quiz_submit():
+    """
+    Processes quiz submission, calculates the user's score, updates quiz points, and returns the result.
+    """
+    data = request.get_json()
+    user_answers = data.get("answers", {})
+
+    # Retrieve stored questions from session
+    questions = session.get("quiz_questions")
+    if not questions:
+        return jsonify({"error": "No quiz questions found"}), 400
+
+    score = 0
+    total = len(questions)
+    for idx, q in enumerate(questions):
+        correct = q.get("correct_answer")
+        if str(idx) in user_answers and user_answers[str(idx)] == correct:
+            score += 1
+
+    # Update user's quiz points if logged in (assuming user[1] holds user id)
+    user_id = user[1]  # Replace with your user session logic
+    if user_id and user_id != "guest":
+        update_quiz_points(g.db, user_id, score)
+
+    result = {"score": score, "total": total, "correct_answers": [q.get("correct_answer") for q in questions] }
+    return jsonify(result), 200
+
+
+def update_quiz_points(db, user_id, score):
+    """
+    Updates the quiz_points column in the Users table by adding the given score.
+    Assumes the Users table has a column named quiz_points.
+    """
+    cursor = db.cursor()
+    query = "UPDATE Users SET quiz_points = COALESCE(quiz_points, 0) + %s WHERE idUsers = %s"
+    cursor.execute(query, (score, user_id))
+    db.commit()
 
 
 @app.before_request
