@@ -194,6 +194,7 @@ def send_email_to_user(recipient_email, categorized_data):
     finally:
         server.quit()
 
+
 def create_account(db, email, username, password):
     """
     Utility function for creating an account.
@@ -210,9 +211,12 @@ def create_account(db, email, username, password):
         db.commit()
     except IntegrityError as e:
         if e.errno == 1062:  # Duplicate entry error code for MySQL
-            raise Exception("Username already exists. Please choose a different username.")
+            raise Exception(
+                "Username already exists. Please choose a different username."
+            )
         else:
             raise
+
 
 def add_friend(db, username, user_id):
     """

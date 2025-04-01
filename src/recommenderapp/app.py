@@ -13,7 +13,16 @@ import os
 import logging
 import requests
 import random
-from flask import Flask, jsonify, render_template, request, g, render_template, jsonify, session
+from flask import (
+    Flask,
+    jsonify,
+    render_template,
+    request,
+    g,
+    render_template,
+    jsonify,
+    session,
+)
 from flask_cors import CORS
 import mysql.connector
 import requests
@@ -235,6 +244,7 @@ def create_acc():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
     return request.data
+
 
 @app.route("/out", methods=["POST"])
 def signout():
@@ -616,7 +626,7 @@ def news_feed():
         "sortBy": "publishedAt",
         "apiKey": news_api_key,
         "pageSize": page_size,
-        "page": page
+        "page": page,
     }
 
     response = requests.get(url, params=params)
@@ -630,9 +640,13 @@ def news_feed():
     # Calculate total pages (round up)
     total_pages = (total_results + page_size - 1) // page_size
 
-    return render_template("news.html", articles=articles, current_page=page, total_pages=total_pages)
+    return render_template(
+        "news.html", articles=articles, current_page=page, total_pages=total_pages
+    )
+
 
 import html  # Add this import at the top with your other imports
+
 
 @app.route("/quiz")
 def quiz_page():
@@ -640,11 +654,7 @@ def quiz_page():
     Fetches movie trivia questions from Open Trivia DB (Entertainment: Film) and renders the quiz page.
     """
     url = "https://opentdb.com/api.php"
-    params = {
-        "amount": 10,
-        "category": 11,  # Entertainment: Film
-        "type": "multiple"
-    }
+    params = {"amount": 10, "category": 11, "type": "multiple"}  # Entertainment: Film
     response = requests.get(url, params=params)
     if response.status_code != 200:
         return jsonify({"error": "Failed to fetch quiz questions"}), 500
@@ -663,14 +673,17 @@ def quiz_page():
         incorrect_answers = [html.unescape(ans) for ans in q.get("incorrect_answers")]
         options = incorrect_answers + [correct_answer]
         random.shuffle(options)
-        processed_questions.append({
-            "question": question_text,
-            "options": options,
-            "correct_answer": correct_answer
-        })
+        processed_questions.append(
+            {
+                "question": question_text,
+                "options": options,
+                "correct_answer": correct_answer,
+            }
+        )
     # Store the processed questions in the session for later verification
-    session['quiz_questions'] = processed_questions
+    session["quiz_questions"] = processed_questions
     return render_template("quiz.html", questions=processed_questions)
+
 
 @app.route("/quiz/submit", methods=["POST"])
 def quiz_submit():
@@ -696,12 +709,9 @@ def quiz_submit():
             score += 1
 
     # Return the result without updating quiz points
-    result = {
-        "score": score,
-        "total": total,
-        "correct_answers": correct_answers
-    }
+    result = {"score": score, "total": total, "correct_answers": correct_answers}
     return jsonify(result), 200
+
 
 @app.before_request
 def before_request():
