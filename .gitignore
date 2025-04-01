@@ -136,4 +136,5 @@ dmypy.json
 .env
 .history/
 
+**/__pycache__/
 

@@ -1,6 +1,13 @@
+import os
+import sys
 import json
 import pytest
-from app import app
+from pathlib import Path
+
+# Adjust this as needed: typically, two levels up from the test file
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from app import app  # Now this import should succeed
 
 @pytest.fixture
 def client():
