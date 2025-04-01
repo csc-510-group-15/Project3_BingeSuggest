@@ -133,6 +133,9 @@ dmypy.json
 .vscode
 
 .idea
+.env
+.history/
 
+**/__pycache__/
 
 
