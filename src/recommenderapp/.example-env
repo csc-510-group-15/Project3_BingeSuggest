@@ -1,7 +1,6 @@
 DB_USER = 'root'
-DB_PASSWORD = 'root'
-DB_HOST = 'db'
+DB_PASSWORD = 'your_password'
+DB_HOST = 'localhost'
 DB_NAME = 'PopcornPicksDB'
 
-OMDB_API_KEY = '<your_omdb_api_key>'
-STREAMING_API_KEY = '<your_streaming_api_key>'
+OMDB_API_KEY = <your_omdb_api_key>

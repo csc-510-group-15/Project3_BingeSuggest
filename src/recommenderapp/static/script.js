@@ -126,6 +126,55 @@ $(document).ready(function () {
 			// changed the min-length for searching movies from 2 to 1
 			minLength: 1,
 		});
+		
+		$("#searchBoxWishlist").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					type: "POST",
+					url: "http://127.0.0.1:5001/search",
+					dataType: "json",
+					cache: false,
+					data: {
+						q: request.term,
+					},
+					success: function (data) {
+						response(data)
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.log(textStatus + " " + errorThrown)
+					},
+				})
+			},
+			select: function(event, ui) {
+				$("#searchBoxWishlist").val(ui.item.label);
+				$("#movieName").val(ui.item.value);
+				return false;
+			},
+			minLength: 1,
+		});
+		
+		$("#addWishlistButton").off("click").click(function() {
+			const movieName = $("#searchBoxWishlist").val();
+			if (movieName) {
+				$.ajax({
+					type: "POST",
+					url: "http://127.0.0.1:5001/add_to_wishlist",
+					contentType: "application/json",
+					data: JSON.stringify({ movieName: movieName }),
+					success: function(response) {
+						alert(response.message);
+						location.reload();
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.error("Error adding movie:", textStatus, errorThrown);
+						alert("An error occurred. Please try again.");
+					}
+				});
+			} else {
+				alert("Please select a movie from the search suggestions.");
+			}
+		});
+
 
 		$("#addButton").off("click").click(function() {
 			//const imdbID = $("#imdbID").val();
@@ -360,6 +409,30 @@ $(document).ready(function () {
 					  });
 				  });
 
+				  var wishlistButton = $("<button/>")
+				  .text("Add to Wishlist")
+				  .attr("data-imdb-id", imdbID)
+				  .addClass("btn btn-info btn-sm")
+				  .click(function (event) {
+					  event.preventDefault();
+					  var imdb_id = $(this).data("imdb-id");
+					  var button = $(this);
+					  $.ajax({
+						  type: "POST",
+						  url: "/add_to_wishlist",
+						  dataType: "json",
+						  contentType: "application/json;charset=UTF-8",
+						  data: JSON.stringify({ imdb_id: imdb_id }),
+						  success: function (response) {
+							  alert(response.message);
+							  button.text("Wishlisted").prop("disabled", true);
+						  },
+						  error: function (error) {
+							  console.log("ERROR ->" + error);
+						  }
+					  });
+				  });
+
 					var watchedHistoryButton = $("<button/>")
     				.text("Add to Watched History")
     				.attr("data-imdb-id", imdbID)
@@ -391,7 +464,7 @@ $(document).ready(function () {
 					if (username == "guest" || username == null) {
 						var leftColumn = $("<td width='80%' />").append(li).append(link).append(streamingButtons);// If the user is a guest, don't put radio buttons and wathclist button in the left column
 					} else {
-						var leftColumn = $("<td width='80%' />").append(li).append(link).append(streamingButtons).append(radios).append(watchlistButton).append(watchedHistoryButton);// Radio buttons and Watchlist button in the left column
+						var leftColumn = $("<td width='80%' />").append(li).append(link).append(streamingButtons).append(radios).append(watchlistButton).append(wishlistButton).append(watchedHistoryButton);// Radio buttons and Watchlist button in the left column
 					}
 					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
 					row.append(leftColumn).append(rightColumn);
@@ -767,6 +840,20 @@ $(document).ready(function () {
 	$("#goToWatchedHistory").click(function () {
 		goToWatchedHistory();
 	});
+
+	function goToWishlist(){
+		$("#loaderLanding").attr("class", "d-flex justify-content-center")
+		$("#centralDivLanding").hide()
+		$("#landingTopNav").hide()
+		setTimeout(function () {
+			window.location.href = "/wishlist"
+		}, 2000)
+	}
+	
+	$("#goToWishlist").click(function () {
+		goToWishlist();
+	});
+
 
 	// Function to handle Get Started button click
 	function backToLandingPage() {

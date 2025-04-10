@@ -388,6 +388,77 @@ def add_to_watchlist(db, user_id, movie_id, timestamp=None):
     else:
         return False  # Indicate that the movie was already in the watchlist
 
+def add_to_wishlist(db, user_id, movie_id, timestamp=None):
+    """
+    Utility function to add a movie to the user's wishlist.
+    Only inserts the movie if it is not already in the user's wishlist.
+    """
+    cursor = db.cursor()
+
+    # Check if the movie is already in the user's wishlist
+    cursor.execute(
+        "SELECT 1 FROM Wishlist WHERE user_id = %s AND movie_id = %s",
+        (int(user_id), int(movie_id))
+    )
+    existing_entry = cursor.fetchone()
+
+    # If the movie is not already in the wishlist, add it
+    if not existing_entry:
+        if timestamp is None:
+            timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+        cursor.execute(
+            "INSERT INTO Wishlist (user_id, movie_id, added_date) VALUES (%s, %s, %s);",
+            (int(user_id), int(movie_id), timestamp)
+        )
+        db.commit()
+        return True  # Indicate that the movie was added
+    else:
+        return False  # Indicate that the movie was already in the wishlist
+
+def remove_from_wishlist(db, user_id, imdb_id):
+    """
+    Utility function to remove a movie from the user's wishlist.
+    """
+    cursor = db.cursor(dictionary=True)
+
+    cursor.execute(
+        "SELECT DISTINCT idMovies FROM Movies WHERE imdb_id = %s;",
+        [imdb_id]
+    )
+
+    wishlist = cursor.fetchone()
+    idMovies = None
+    if wishlist is not None:
+        idMovies = wishlist["idMovies"]
+
+    if idMovies is None:
+        return None, "Movie not in wishlist"
+
+    # Delete the movie from wishlist
+    cursor.execute(
+        "DELETE FROM Wishlist WHERE movie_id = %s AND user_id = %s;",
+        [idMovies, user_id]
+    )
+    db.commit()
+    return idMovies, "Movie removed from wishlist"
+
+def get_wishlist(db, user_id):
+    """
+    Utility function to get the user's wishlist.
+    """
+    cursor = db.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT m.name, m.imdb_id, w.added_date
+        FROM Wishlist w
+        JOIN Movies m ON w.movie_id = m.idMovies
+        WHERE w.user_id = %s
+        ORDER BY w.added_date DESC;
+        """,
+        [user_id]
+    )
+    wishlist = cursor.fetchall()
+    return wishlist
 
 def get_imdb_id_by_name(db, movie_name):
     """
