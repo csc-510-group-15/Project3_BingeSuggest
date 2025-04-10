@@ -422,6 +422,7 @@ def get_watchlist():
     watchlist = cursor.fetchall()
     return jsonify(watchlist), 200
 
+
 @app.route("/wishlist", methods=["GET"])
 def wishlist_page():
     """
@@ -431,6 +432,7 @@ def wishlist_page():
         return render_template("wishlist.html")
     return render_template("login.html")
 
+
 @app.route("/add_to_wishlist", methods=["POST"])
 def add_movie_to_wishlist():
     """
@@ -438,26 +440,35 @@ def add_movie_to_wishlist():
     """
     data = request.get_json()
     movie_name = data.get("movieName")
-    imdb_id = get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
-    
+    imdb_id = (
+        get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
+    )
+
     if not imdb_id:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
 
     cursor = g.db.cursor()
     cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
     movie_id_result = cursor.fetchone()
-    
+
     if movie_id_result:
         movie_id = movie_id_result[0]
         user_id = user[1]
         was_added = add_to_wishlist(g.db, user_id, movie_id)
-        
+
         if was_added:
-            return jsonify({"status": "success", "message": "Movie added to wishlist"}), 200
+            return (
+                jsonify({"status": "success", "message": "Movie added to wishlist"}),
+                200,
+            )
         else:
-            return jsonify({"status": "info", "message": "Movie already in wishlist"}), 200
+            return (
+                jsonify({"status": "info", "message": "Movie already in wishlist"}),
+                200,
+            )
     else:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
+
 
 @app.route("/getWishlistData", methods=["GET"])
 def get_wishlist():
@@ -467,6 +478,7 @@ def get_wishlist():
     user_id = user[1]
     wishlist = get_wishlist(g.db, user_id)
     return jsonify(wishlist), 200
+
 
 @app.route("/deleteWishlistData", methods=["POST"])
 def delete_wishlist_data():
@@ -478,10 +490,17 @@ def delete_wishlist_data():
     idMovies, _ = remove_from_wishlist(g.db, user_id, imdb_id)
 
     if idMovies:
-        return jsonify({"status": "success", "message": "Movie deleted from wishlist"}), 200
+        return (
+            jsonify({"status": "success", "message": "Movie deleted from wishlist"}),
+            200,
+        )
     else:
-        return jsonify({"status": "info", "message": "Failed to delete movie from wishlist"}), 200
-    
+        return (
+            jsonify(
+                {"status": "info", "message": "Failed to delete movie from wishlist"}
+            ),
+            200,
+        )
 
 
 @app.route("/deleteWatchlistData", methods=["POST"])
