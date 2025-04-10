@@ -98,6 +98,16 @@ def wall_page():
     return render_template("login.html")
 
 
+@app.route("/higher_or_lower")
+def higher_or_lower_game_page():
+    """
+    Renders the "higher or lower" game page.
+    """
+    if user[1] is not None or user[1] == "guest":
+        return render_template("higher_or_lower.html")
+    return render_template("login.html")
+
+
 @app.route("/review")
 def review_page():
     """
