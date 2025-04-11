@@ -388,6 +388,7 @@ def add_to_watchlist(db, user_id, movie_id, timestamp=None):
     else:
         return False  # Indicate that the movie was already in the watchlist
 
+
 def add_to_wishlist(db, user_id, movie_id, timestamp=None):
     """
     Utility function to add a movie to the user's wishlist.
@@ -398,7 +399,7 @@ def add_to_wishlist(db, user_id, movie_id, timestamp=None):
     # Check if the movie is already in the user's wishlist
     cursor.execute(
         "SELECT 1 FROM Wishlist WHERE user_id = %s AND movie_id = %s",
-        (int(user_id), int(movie_id))
+        (int(user_id), int(movie_id)),
     )
     existing_entry = cursor.fetchone()
 
@@ -408,12 +409,13 @@ def add_to_wishlist(db, user_id, movie_id, timestamp=None):
             timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         cursor.execute(
             "INSERT INTO Wishlist (user_id, movie_id, added_date) VALUES (%s, %s, %s);",
-            (int(user_id), int(movie_id), timestamp)
+            (int(user_id), int(movie_id), timestamp),
         )
         db.commit()
         return True  # Indicate that the movie was added
     else:
         return False  # Indicate that the movie was already in the wishlist
+
 
 def remove_from_wishlist(db, user_id, imdb_id):
     """
@@ -422,8 +424,7 @@ def remove_from_wishlist(db, user_id, imdb_id):
     cursor = db.cursor(dictionary=True)
 
     cursor.execute(
-        "SELECT DISTINCT idMovies FROM Movies WHERE imdb_id = %s;",
-        [imdb_id]
+        "SELECT DISTINCT idMovies FROM Movies WHERE imdb_id = %s;", [imdb_id]
     )
 
     wishlist = cursor.fetchone()
@@ -437,10 +438,11 @@ def remove_from_wishlist(db, user_id, imdb_id):
     # Delete the movie from wishlist
     cursor.execute(
         "DELETE FROM Wishlist WHERE movie_id = %s AND user_id = %s;",
-        [idMovies, user_id]
+        [idMovies, user_id],
     )
     db.commit()
     return idMovies, "Movie removed from wishlist"
+
 
 def get_wishlist(db, user_id):
     """
@@ -455,10 +457,11 @@ def get_wishlist(db, user_id):
         WHERE w.user_id = %s
         ORDER BY w.added_date DESC;
         """,
-        [user_id]
+        [user_id],
     )
     wishlist = cursor.fetchall()
     return wishlist
+
 
 def get_imdb_id_by_name(db, movie_name):
     """
