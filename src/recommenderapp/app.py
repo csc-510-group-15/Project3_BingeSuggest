@@ -57,7 +57,7 @@ from src.prediction_scripts.item_based import (
     recommend_for_new_user_d,
     recommend_for_new_user_a,
     recommend_for_new_user_all,
-    get_random_movie
+    get_random_movie,
 )
 
 sys.path.remove("../../")
