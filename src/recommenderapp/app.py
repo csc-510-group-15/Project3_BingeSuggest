@@ -57,6 +57,7 @@ from src.prediction_scripts.item_based import (
     recommend_for_new_user_d,
     recommend_for_new_user_a,
     recommend_for_new_user_all,
+    get_random_movie
 )
 
 sys.path.remove("../../")
@@ -98,7 +99,17 @@ def wall_page():
     return render_template("login.html")
 
 
-@app.route("/higher_or_lower")
+@app.route("/games/landing")
+def games_landing_page():
+    """
+    Renders the games landing page.
+    """
+    if user[1] is not None or user[1] == "guest":
+        return render_template("games_landing.html")
+    return render_template("login.html")
+
+
+@app.route("/games/higher_or_lower")
 def higher_or_lower_game_page():
     """
     Renders the "higher or lower" game page.
@@ -106,6 +117,14 @@ def higher_or_lower_game_page():
     if user[1] is not None or user[1] == "guest":
         return render_template("higher_or_lower.html")
     return render_template("login.html")
+
+
+@app.route("/getRandomMovie", methods=["GET"])
+def random_movie():
+    """
+    Gets a random movie from the data set.
+    """
+    return get_random_movie()
 
 
 @app.route("/review")
@@ -658,7 +677,7 @@ def news_feed():
 import html  # Add this import at the top with your other imports
 
 
-@app.route("/quiz")
+@app.route("/games/quiz")
 def quiz_page():
     """
     Fetches movie trivia questions from Open Trivia DB (Entertainment: Film) and renders the quiz page.
