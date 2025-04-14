@@ -716,7 +716,7 @@ def quiz_page():
     return render_template("quiz.html", questions=processed_questions)
 
 
-@app.route("/quiz/submit", methods=["POST"])
+@app.route("/games/quiz/submit", methods=["POST"])
 def quiz_submit():
     """
     Processes quiz submission, calculates the user's score, and returns the result including
