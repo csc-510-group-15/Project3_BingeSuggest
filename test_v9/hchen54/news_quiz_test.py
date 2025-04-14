@@ -163,6 +163,7 @@ def dummy_quiz_get(url, params=None, **kwargs):
 def patch_requests_get(monkeypatch):
     def fake_requests_get(url, params=None, **kwargs):
         from urllib.parse import urlparse
+
         parsed_url = urlparse(url)
         if parsed_url.hostname == "newsapi.org":
             return dummy_news_get(url, params, **kwargs)
