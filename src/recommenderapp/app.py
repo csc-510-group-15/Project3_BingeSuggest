@@ -18,6 +18,7 @@ from flask import (
     jsonify,
     render_template,
     request,
+    escape,
     g,
     render_template,
     jsonify,
@@ -242,8 +243,9 @@ def create_acc():
     try:
         create_account(g.db, data["email"], data["username"], data["password"])
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
-    return request.data
+        logging.error("Exception occurred", exc_info=True)
+        return jsonify({"error": "An internal server error has occurred."}), 400
+    return escape(request.data)
 
 
 @app.route("/out", methods=["POST"])
@@ -252,7 +254,7 @@ def signout():
     Handles signing out the active user
     """
     user[1] = None
-    return request.data
+    return escape(request.data)
 
 
 @app.route("/log", methods=["POST"])
@@ -265,7 +267,7 @@ def login():
     if resp is None:
         return 400
     user[1] = resp
-    return request.data
+    return escape(request.data)
 
 
 @app.route("/friend", methods=["POST"])
@@ -275,7 +277,7 @@ def friend():
     """
     data = json.loads(request.data)
     add_friend(g.db, data["username"], user[1])
-    return request.data
+    return escape(request.data)
 
 
 @app.route("/guest", methods=["POST"])
