@@ -7,10 +7,21 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import os
 import pandas as pd
+import random as rand
 
 app_dir = os.path.dirname(os.path.abspath(__file__))
 code_dir = os.path.dirname(app_dir)
 project_dir = os.path.dirname(code_dir)
+
+
+def get_random_movie():
+    """
+    Returns a random movie from the dataset.
+    """
+    movies = pd.read_csv(os.path.join(project_dir, "data", "movies.csv"))
+    rand_id = rand.randrange(0, len(movies))
+    # resp = { "id": rand_id, "title": movies["title"][rand_id], "score": movies["imdb_ratings"][rand_id] }
+    return {"imdbID": movies["imdb_id"][rand_id]}
 
 
 def recommend_for_new_user(user_rating, gw, dw, aw):

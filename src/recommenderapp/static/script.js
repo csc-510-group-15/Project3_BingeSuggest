@@ -284,6 +284,7 @@ $(document).ready(function () {
 				var i = 0
 				var recommendations = response["recommendations"]
 				var imdbIds = response["imdb_id"]
+				// for every recommendation...
 				for (var i = 0; i < recommendations.length; i++) {
 					if(i>=5){
 					ulList = $("#predictedMovies2")
