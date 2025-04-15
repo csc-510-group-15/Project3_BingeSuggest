@@ -496,7 +496,7 @@ def add_movie_to_wishlist():
     if not imdb_id:
         movie_name = data.get("movieName")
         imdb_id = get_imdb_id_by_name(g.db, movie_name) if movie_name else None
-    
+
     if not imdb_id:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
 
@@ -507,7 +507,7 @@ def add_movie_to_wishlist():
     if movie_id_result:
         movie_id = movie_id_result[0]
         user_id = user[1]
-        
+
         was_added = add_to_wishlist(g.db, user_id, movie_id)
 
         if was_added:

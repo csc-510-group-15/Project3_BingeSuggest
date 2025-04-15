@@ -147,14 +147,14 @@ def test_get_wishlist_data(client):
 #     """Test removing item from wishlist"""
 #     # First add a movie
 #     client.post("/add_to_wishlist", json={"imdb_id": "tt1234567"})
-    
+
 #     # Then delete it
 #     response = client.post(
 #         "/deleteWishlistData",
 #         data=json.dumps("tt1234567"),
 #         content_type="application/json",
 #     )
-    
+
 #     data = json.loads(response.get_data(as_text=True))
 #     assert response.status_code == 200
 #     assert data["status"] == "success"
@@ -268,5 +268,12 @@ def test_wishlist_with_guest_user(client):
 def test_wishlist_page_navigate_correctly(client):
     response = client.get("/wishlist")
     resp_html = response.get_data(as_text=True)
-    for endpoint in ["getStartedNav", "goToWallNav", "goToReviewNav", "goToWishlistNav", "/news", "/games/landing"]:
+    for endpoint in [
+        "getStartedNav",
+        "goToWallNav",
+        "goToReviewNav",
+        "goToWishlistNav",
+        "/news",
+        "/games/landing",
+    ]:
         assert endpoint in resp_html
