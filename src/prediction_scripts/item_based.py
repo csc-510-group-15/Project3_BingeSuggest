@@ -14,13 +14,23 @@ code_dir = os.path.dirname(app_dir)
 project_dir = os.path.dirname(code_dir)
 
 
-def get_random_movie():
+def get_total_movie_count():
+    movies = pd.read_csv(os.path.join(project_dir, "data", "movies.csv"))
+    return len(movies)
+
+
+def get_random_movie(id_override = -1):
     """
     Returns a random movie from the dataset.
     """
     movies = pd.read_csv(os.path.join(project_dir, "data", "movies.csv"))
+
+    if (id_override >= get_total_movie_count()):
+        return {}
+    if (id_override >= 0):
+        return {"imdbID": movies["imdb_id"][id_override]}
+    
     rand_id = rand.randrange(0, len(movies))
-    # resp = { "id": rand_id, "title": movies["title"][rand_id], "score": movies["imdb_ratings"][rand_id] }
     return {"imdbID": movies["imdb_id"][rand_id]}
 
 

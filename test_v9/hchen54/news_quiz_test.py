@@ -1,8 +1,8 @@
 import os
 import sys
 import json
-import pytest
 from pathlib import Path
+import pytest
 
 # Ensure the repository root is in sys.path so that we can import modules from src.
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -88,7 +88,7 @@ def dummy_news_get(url, params=None, **kwargs):
           <a href="/wall">Movie Wall</a>
           <a href="/review">Review a movie</a>
           <a href="/news">Movie News</a>
-          <a href="/quiz">Movie Quiz</a>
+          <a href="/games/quiz">Movie Quiz</a>
         </nav>
       </body>
     </html>
@@ -125,7 +125,7 @@ def dummy_quiz_get(url, params=None, **kwargs):
           <a href="/wall">Movie Wall</a>
           <a href="/review">Review a movie</a>
           <a href="/news">Movie News</a>
-          <a href="/quiz">Movie Quiz</a>
+          <a href="/games/quiz">Movie Quiz</a>
         </nav>
       </body></html>
     """
@@ -140,7 +140,7 @@ def dummy_quiz_get(url, params=None, **kwargs):
             for i in range(10)
         ],
     }
-    # Save dummy questions in session (for /quiz/submit)
+    # Save dummy questions in session (for /games/quiz/submit)
     with app.test_request_context("/"):
         from flask import session
 
@@ -248,49 +248,49 @@ def test_news_total_pages_calculation(client):
 # Quiz Endpoint Tests
 # ------------------
 def test_quiz_endpoint_status(client):
-    response = client.get("/quiz")
+    response = client.get("/games/quiz")
     assert response.status_code == 200
 
 
 def test_quiz_endpoint_returns_html(client):
-    response = client.get("/quiz")
+    response = client.get("/games/quiz")
     data = response.get_data(as_text=True)
     assert "quiz-question" in data
 
 
 def test_quiz_questions_count(client):
-    response = client.get("/quiz")
+    response = client.get("/games/quiz")
     data = response.get_data(as_text=True)
     count = data.count('class="quiz-question"')
     assert count == 10
 
 
 def test_quiz_question_has_question_key(client):
-    response = client.get("/quiz")
+    response = client.get("/games/quiz")
     data = response.get_data(as_text=True)
     assert "Question" in data
     assert "?" in data
 
 
 def test_quiz_question_has_options(client):
-    response = client.get("/quiz")
+    response = client.get("/games/quiz")
     data = response.get_data(as_text=True)
     assert 'type="radio"' in data
 
 
 # If your template always shows correct answers, you may skip this test.
-@pytest.mark.skip(reason="Template shows correct answers in GET /quiz")
+@pytest.mark.skip(reason="Template shows correct answers in GET /games/quiz")
 def test_quiz_question_has_correct_answer_hidden(client):
-    response = client.get("/quiz")
+    response = client.get("/games/quiz")
     data = response.get_data(as_text=True)
     assert "Correct answer:" not in data
 
 
 def test_quiz_submit_endpoint_status(client):
-    client.get("/quiz")  # Load quiz to set session data
+    client.get("/games/quiz")  # Load quiz to set session data
     dummy_answers = {str(i): "option1" for i in range(10)}
     response = client.post(
-        "/quiz/submit",
+        "/games/quiz/submit",
         data=json.dumps({"answers": dummy_answers}),
         content_type="application/json",
     )
@@ -298,10 +298,10 @@ def test_quiz_submit_endpoint_status(client):
 
 
 def test_quiz_submit_returns_json(client):
-    client.get("/quiz")
+    client.get("/games/quiz")
     dummy_answers = {str(i): "option1" for i in range(10)}
     response = client.post(
-        "/quiz/submit",
+        "/games/quiz/submit",
         data=json.dumps({"answers": dummy_answers}),
         content_type="application/json",
     )
@@ -312,10 +312,10 @@ def test_quiz_submit_returns_json(client):
 
 
 def test_quiz_submit_score_calculation(client):
-    client.get("/quiz")
+    client.get("/games/quiz")
     dummy_answers = {str(i): "incorrect" for i in range(10)}
     response = client.post(
-        "/quiz/submit",
+        "/games/quiz/submit",
         data=json.dumps({"answers": dummy_answers}),
         content_type="application/json",
     )
@@ -324,10 +324,10 @@ def test_quiz_submit_score_calculation(client):
 
 
 def test_quiz_submit_response_contains_correct_answers(client):
-    client.get("/quiz")
+    client.get("/games/quiz")
     dummy_answers = {str(i): "option1" for i in range(10)}
     response = client.post(
-        "/quiz/submit",
+        "/games/quiz/submit",
         data=json.dumps({"answers": dummy_answers}),
         content_type="application/json",
     )
@@ -339,13 +339,13 @@ def test_quiz_submit_response_contains_correct_answers(client):
 def test_quiz_session_storage_exists(client):
     with client.session_transaction() as session_data:
         assert "quiz_questions" not in session_data
-    client.get("/quiz")
+    client.get("/games/quiz")
     with client.session_transaction() as session_data:
         assert "quiz_questions" in session_data
 
 
 def test_quiz_questions_unescaped_html(client):
-    response = client.get("/quiz")
+    response = client.get("/games/quiz")
     data = response.get_data(as_text=True)
     assert "&quot;" not in data
     assert "&amp;" not in data
@@ -353,9 +353,9 @@ def test_quiz_questions_unescaped_html(client):
 
 def test_news_and_quiz_pages_navigate_correctly(client):
     news_response = client.get("/news?page=1")
-    quiz_response = client.get("/quiz")
+    quiz_response = client.get("/games/quiz")
     news_html = news_response.get_data(as_text=True)
     quiz_html = quiz_response.get_data(as_text=True)
-    for endpoint in ["/search_page", "/wall", "/review", "/news", "/quiz"]:
+    for endpoint in ["/search_page", "/wall", "/review", "/news", "/games/landing"]:
         assert endpoint in news_html
         assert endpoint in quiz_html
