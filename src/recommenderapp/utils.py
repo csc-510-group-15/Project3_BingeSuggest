@@ -212,7 +212,10 @@ def create_account(db, email, username, password):
     except IntegrityError as e:
         if e.errno == 1062:  # Duplicate entry error code for MySQL
             raise Exception(
-                "Username already exists. Please choose a different username." + str(username) + str(email) + str(h)
+                "Username already exists. Please choose a different username."
+                + str(username)
+                + str(email)
+                + str(h)
             )
         else:
             raise

@@ -123,7 +123,7 @@ def higher_or_lower_game_page():
 
 
 @app.route("/getRandomMovie", methods=["GET"])
-def random_movie(override_id = -1):
+def random_movie(override_id=-1):
     """
     Gets a random movie from the data set.
     """
