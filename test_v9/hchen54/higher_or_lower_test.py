@@ -13,15 +13,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 # os.environ["NEWS_API_KEY"] = "dummy_key"
 
 from src.recommenderapp.app import app  # Import the Flask app
-from src.recommenderapp.app import (
-    random_movie,
-    higher_or_lower_game_page
-)
+from src.recommenderapp.app import random_movie, higher_or_lower_game_page
 
-from src.prediction_scripts.item_based import (
-    get_random_movie,
-    get_total_movie_count
-)
+from src.prediction_scripts.item_based import get_random_movie, get_total_movie_count
+
 
 # --- Patch MySQL Connector to avoid real DB calls ---
 class DummyCursor:
@@ -213,7 +208,15 @@ def test_get_random_movie_seeded():
 
 
 def test_get_total_movie_count():
-    movies = pd.read_csv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "data", "movies.csv"))
+    movies = pd.read_csv(
+        os.path.join(
+            os.path.dirname(
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            ),
+            "data",
+            "movies.csv",
+        )
+    )
     assert len(movies) == get_total_movie_count()
 
 
