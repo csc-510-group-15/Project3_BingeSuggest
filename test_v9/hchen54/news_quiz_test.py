@@ -1,8 +1,8 @@
 import os
 import sys
 import json
-import pytest
 from pathlib import Path
+import pytest
 
 # Ensure the repository root is in sys.path so that we can import modules from src.
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
