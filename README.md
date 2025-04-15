@@ -1,47 +1,34 @@
-# <i> BingeSuggest🍿: Your Destination for Movie Recommendations </i>
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/CSC-510-Group-5/BingeSuggest/graphs/commit-activity)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/CSC-510-Group-5/BingeSuggest)](https://github.com/CSC-510-Group-5/BingeSuggest/pulse)
-[![GitHub issues](https://img.shields.io/github/issues/CSC-510-Group-5/BingeSuggest)](https://github.com/CSC-510-Group-5/BingeSuggest/issues)
-[![GitHub issues-closed](https://img.shields.io/github/issues-closed/CSC-510-Group-5/BingeSuggest.svg)](https://github.com/CSC-510-Group-5/BingeSuggest/issues?q=is%3Aissue+is%3Aclosed)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://github.com/CSC-510-Group-5/BingeSuggest/blob/main/LICENSE)
-[![Unittest](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/unittest.yml/badge.svg?branch=main&event=push)](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/unittest.yml)
-[![Codecov](https://img.shields.io/codecov/c/github/CSC-510-Group-5/BingeSuggest)](https://codecov.io/gh/CSC-510-Group-5/BingeSuggest) 
-[![StyleCheck: Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/pylint.yml)
-![GitHub contributors](https://img.shields.io/github/contributors/CSC-510-Group-5/BingeSuggest)
-![GitHub Release Date - Published_At](https://img.shields.io/badge/release_date-February_25-blue)
-![GitHub repo size](https://img.shields.io/github/repo-size/CSC-510-Group-5/BingeSuggest)
-[![Black](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/black.yml/badge.svg)](https://github.com/CSC-510-Group-5/BingeSuggest/actions/workflows/black.yml)
-[![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/CSC-510-Group-5/BingeSuggest/bug?color=green&label=Squished%20bugs)](https://github.com/CSC-510-Group-5/BingeSuggest/issues?q=is%3Aissue+label%3Abug+is%3Aclosed)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14219839.svg)](https://doi.org/10.5281/zenodo.14219839)
-  
+# 🍿 **BingeSuggest: Your Ultimate Movie Recommendation Companion**
+
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/csc-510-group-15/Project3_BingeSuggest/graphs/commit-activity)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/csc-510-group-15/Project3_BingeSuggest)](https://github.com/csc-510-group-15/Project3_BingeSuggest/pulse)
+[![GitHub issues](https://img.shields.io/github/issues/csc-510-group-15/Project3_BingeSuggest)](https://github.com/csc-510-group-15/Project3_BingeSuggest/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/LICENSE)
+[![Unit Tests](https://github.com/csc-510-group-15/Project3_BingeSuggest/actions/workflows/unittest.yml/badge.svg)](https://github.com/csc-510-group-15/Project3_BingeSuggest/actions/workflows/unittest.yml)
+[![Coverage](https://img.shields.io/codecov/c/github/csc-510-group-15/Project3_BingeSuggest)](https://codecov.io/gh/csc-510-group-15/Project3_BingeSuggest) 
+
+![GitHub contributors](https://img.shields.io/github/contributors/csc-510-group-15/Project3_BingeSuggest)
+![GitHub Release Date](https://img.shields.io/badge/release_date-February_25-blue)
+![GitHub repo size](https://img.shields.io/github/repo-size/csc-510-group-15/Project3_BingeSuggest)
+
 <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/header_display.png" alt="BingeSuggest" style="width:1000px;"/>
 <b>BingeSuggest is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, BingeSuggest is here to transform the way you discover, enjoy, and connect with movies.</b>
 
-# Contents  
-
-- [Why use BingeSuggest?](#why-use-bingesuggest)
-- [Project Documentation](#documentation)
-- [Project Presentation Videos](#project-presentation-video)
-- [Brief Overview of Project](#project-description)
-- [What Docs](#what-docs)
-- [How Docs](#how-docs)<br/>
-    - [Recommendation Mechanism](#movie-recommendation-mechanism)<br/>
-    - [Email Notifier](#email-notifier)
-    - [Create an Acccount](#create-an-account)
-    - [Login to Account](#login-to-account)
-    - [Profile and Friends](#profile-and-friends)
-    - [Wall](#wall)
-- [Improvements Made in the Project](#project-3-delta)
-- [TechStack Used for the Development of Project](#tech-stack-used)
-- [Steps for Execution](#getting-started)
-- [Future Scope](#future-scope)
-- [Contribute](#contribute-to-the-project)
-- [Team Members](#contributors)
+## 📖 **Contents**
+- [Why Use BingeSuggest?](#why-use-bingesuggest)
+- [Documentation](#documentation)
+- [Project Videos](#project-videos)
+- [Features Overview](#features-overview)
+- [Technical Stack](#technical-stack)
+- [Getting Started](#getting-started)
+- [Future Improvements](#future-improvements)
+- [Contributing](#contributing)
+- [Contributors](#contributors)
 - [Contact](#contact)
 - [License](#license)
 
-## Why use BingeSuggest?
+## 🚀 **Why Use BingeSuggest?**
 
 <img
   src="https://media.giphy.com/media/l1J9GIXk9w7OYsd5S/giphy.gif"
@@ -50,93 +37,45 @@
   align="right"
 />
 
-BingeSuggest: Your movie recommender! Input movies, get tailored suggestions, and share via email. Elevate your movie choices effortlessly!
+BingeSuggest streamlines your movie experience by providing fast, customized recommendations based on your favorite films. Engage with friends, save movies for later, discuss your favorite flicks, and stay updated with movie news and trivia—all in one place.
 
-- **Efficient:** Lightning-fast recommendations for movie buffs! 🚀
-- **Adaptable:** Tailor the recommendations to your taste.
-- **Accessible:** Works across all platforms and shells.
-- **Insightful:** Get movie insights at a glance.
-- **Comprehensive:** Supports a wide array of user-preferred movies.
-- **Simple:** Easy installation and setup – start discovering great movies in no time!"
-
-## Documentation
-Checkout for project documentation [here](https://github.com/ychen-207523/BingeSuggest/tree/main/docs)
-
-## Project Presentation Video
-### New Features 3 minute demo
-<a href="https://www.youtube.com/watch?v=Nxew9mdoYSA" target="_blank">
-  <img src="https://img.youtube.com/vi/Nxew9mdoYSA/hqdefault.jpg" alt="BingeSuggest" style="width:600px;"/>
-</a>
-
-### Why contribute?
-[![why contribute video](https://img.youtube.com/vi/uwJiHxyr-GY/hqdefault.jpg)](https://www.youtube.com/watch?v=uwJiHxyr-GY)
+- **Fast & Efficient:** Instant tailored movie recommendations.
+- **Adaptive:** Recommendations improve with your feedback.
+- **Social Integration:** Connect and share with friends.
+- **Engaging:** Enjoy interactive quizzes and comparisons.
+- **Up-to-date:** Latest movie news and industry buzz.
 
 
-## Project Description
-BingeSuggest is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, BingeSuggest offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our documentation [here](https://github.com/ychen-207523/BingeSuggest/tree/main/docs)
+## 📚 **Documentation**
+Explore detailed [project documentation](https://github.com/csc-510-group-15/Project3_BingeSuggest/tree/main/docs).
 
-## What docs
-View our documentation outlining each class and function of BingeSuggest here
-- [Backend](https://github.com/ychen-207523/BingeSuggest/blob/main/docs/backend.md)
-- [Frontend](https://github.com/ychen-207523/BingeSuggest/blob/main/docs/frontend.md)
-- [Testing](https://github.com/ychen-207523/BingeSuggest/blob/main/docs/testing.md)
+- [Backend](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/docs/backend.md)
+- [Frontend](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/docs/frontend.md)
+- [Testing](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/docs/testing.md)
 
-View our autogenerated doco here [Doco](https://github.com/ychen-207523/BingeSuggest/blob/main/docs/generated_docs/)
+View autogenerated documentation [here](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/docs/generated_docs/).
 
-## How docs
 
-### Movie Discussion
-#### (Modified in version 7)
-**A discussion forum is added for every movie where users can engage in conversations by posting messages and responding to others**
-  
-<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/DiscussionForum.gif" width="600" height="375">
 
-### My Watchlist
-#### (Modified in version 7)
-**The user can save (or remove) movies which they wish to watch later to My Watchlist**
+## 🎥 **Project Videos**
 
-<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/WatchList.gif" width="600" height="375">
+- [**New Features 3-Minute Demo**](https://www.youtube.com/watch?v=Nxew9mdoYSA)
+- [**Why Contribute?**](https://www.youtube.com/watch?v=uwJiHxyr-GY)
 
-### My Watched History 
-#### (Modified in version 7)
-**The user can save (or remove) movies already seen to Watched History**
-  
-<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/WatchHistory.gif" width="600" height="375">
 
-### Movie Recommendation Mechanism 
-**The user selects upto 5 movies to get relevant recommendations based on genre, director, actor, and all combined. User can also provide feedback for the same!**
-  
-<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/recommend_mechanism.gif" width="600" height="375">
+## 🛠️ **Features Overview**
+- **Personalized Recommendations:** Up to 10 suggestions tailored to your movie preferences.
+- **Movie Discussions:** Engage in community forums for every film.
+- **Watchlist & History:** Save movies you wish to watch and track those you've seen.
+- **Email Notifications:** Receive recommendations and feedback via email.
+- **User Accounts:** Secure account management with persistent reviews and recommendations.
+- **Social Wall:** Interact with recent reviews shared by the community.
+- **Movie News 🆕 (Version 9):** Latest updates on upcoming movies, box office reports, and industry trends.
+- **Games 🆕 (Version 9):**
+  - **Movie Quiz:** Enjoy quizzes featuring movie trivia, famous quotes, and actor/director facts.
+  - **Compare Movie Reviews:** Interactive game to compare movies based on review scores.
 
-### Email Notifier
-**The user sends his/her movies feedback via an email (Notify Me button)**
-  
-<div style="display: flex; justify-content: space-between;">
-    <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
-    <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/email.png" alt="Email" width="400" height="400">
-</div>
-
-### Create an Account
-**Users can now create accounts, persisting data including their movie reviews and recommendations**
-<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/create_account.gif" width="600" height="375">
-
-### Login to account
-**The user can log in to their account securly with encrypted passwords stored in our database**
-<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/login.gif" width="600" height="375">
-
-### Profile and Friends
-**The user can add friends, view the movies reviewed by the friends, and see their reviewed movies in their profile**
-<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/profile.gif" width="600" height="375">
-
-### Wall
-**The user can interact with other users, by viewing a community sourced wall of recent moview reviews**
-<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/wall.gif" width="600" height="375">
-
-## Version 8 Delta
-Check out the significant changes that we made for Version 8 [here](https://github.com/ychen-207523/BingeSuggest/blob/main/version8/V8Changes.md)
-
-## Tech stack Used👨‍💻:
-
+## 🔧 **Technical Stack**
 <code><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-ar21.svg"></a></code>
 <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/w3_css/w3_css-ar21.svg"></a></code> <code><a href="https://www.javascript.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/javascript/javascript-ar21.svg"></a></code>
 <code><a href="https://www.jquery.com//" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/jquery/jquery-horizontal.svg"></a></code>
@@ -153,40 +92,105 @@ Check out the significant changes that we made for Version 8 [here](https://gith
 <img src="https://media.giphy.com/media/kH6CqYiquZawmU1HI6/giphy.gif" width ="150"/> 
 </p>
 
-## Getting Started
+## 🆕 Version 9 Features
 
- Step 1: 
-  Git Clone the Repository 
-  
-    git clone https://github.com/ychen-207523/BingeSuggest.git
-    
-  (OR) Download the .zip file on your local machine from the following link
-  
-    https://github.com/ychen-207523/BingeSuggest
-  
- Step 2:
-   Follow the setup instructions in the installation documentation
+### 📰 Movie News
+**Stay informed with the latest updates on upcoming movies, box office stats, cast announcements, and industry trends.**  
+*(Screenshot coming soon)*
+
+---
+
+### 🎮 Movie Quiz
+**Challenge yourself with trivia questions about famous movie quotes, actors, directors, and behind-the-scenes facts. Great for fun and learning!**  
+*(Screenshot coming soon)*
+
+---
+
+### 🎯 Compare Movie Reviews
+**A game where users guess which movie has the higher review score based on critic or audience ratings. Fun way to explore movies and test your instincts!**  
+*(Screenshot coming soon)*
+
+---
+
+### Movie Recommendation Mechanism  
+#### (Introduced in earlier versions, refined in v8)  
+**Select up to 5 movies and get relevant recommendations based on genre, director, actor, and a combination. Provide feedback to improve suggestions.**  
+
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/recommend_mechanism.gif" width="600" height="375">
+
+### Email Notifier  
+#### (Improved in version 8)  
+**Send feedback and movie recommendations to your email with the click of a button.**  
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
+    <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/email.png" alt="Email" width="400" height="400">
+</div>
+
+### Create an Account  
+#### (Version 8)  
+**Users can now register an account to persist their preferences, reviews, and interactions.**  
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/create_account.gif" width="600" height="375">
+
+### Login to Account  
+#### (Version 8)  
+**Secure login with encrypted passwords stored in the backend.**  
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/login.gif" width="600" height="375">
+
+### Profile and Friends  
+#### (Version 8)  
+**Add friends, view their reviews, and manage your own profile with personalized activity.**  
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/profile.gif" width="600" height="375">
+
+### Wall  
+#### (Version 8)  
+**A community wall showing recent movie reviews from all users.**  
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/wall.gif" width="600" height="375">
+
+---
+
+### Movie Discussion  
+#### (Introduced in version 7)  
+**Each movie has a discussion forum for users to post and reply to messages.**  
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/DiscussionForum.gif" width="600" height="375">
+
+### My Watchlist  
+#### (Version 7)  
+**Save or remove movies you want to watch later.**  
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/WatchList.gif" width="600" height="375">
+
+### My Watched History  
+#### (Version 7)  
+**Track movies you've already seen with the Watched History feature.**  
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/WatchHistory.gif" width="600" height="375">
+
+---
+
+## 🔁 Version 8 Delta  
+Check out the significant improvements and additions in Version 8 [here](https://github.com/ychen-207523/BingeSuggest/blob/main/version8/V8Changes.md)
+
+
+
+## 🚦 **Getting Started**
+
+Clone the repository:
+
+```bash
+git clone https://github.com/csc-510-group-15/Project3_BingeSuggest.git
+```
+
+Follow the installation guide to set up dependencies and run the app:
+👉 [Installation Instructions](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/docs/install.md)
+
+Once installed, you're all set to enjoy personalized movie recommendations and explore the full feature set of BingeSuggest!
    
-    https://github.com/ychen-207523/BingeSuggest/blob/main/docs/install.md
-    
-    
-<b>Finally, start enjoying personalized movie recommendations!</b>
+## 🔮 **Future Improvements**
 
-## Future Scope
-BingeSuggest is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
+The following enhancements are planned for upcoming releases:
 
-1. **Improve application performance**: Update the applications recommendation feature and page navigation to avoid unnecessary backend calls
-
-2. **Google OAuth Login**: Allow users to log in with their existing google accounts
-
-3. **Improve application security**: Remove API calls that return the backend services API keys to the frontend
-
-4. **Include more recommendations**: Add additional features to recommend movies based on
-
-## Contribute to the Project!
-
-Please refer to the [CONTRIBUTING.md](https://github.com/ychen-207523/BingeSuggest/blob/main/CONTRIBUTING.md) if you want to contribute to the BingeSuggest source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️!
-
+- **Profile Customization:** Allow users to customize their profiles extensively.
+- **Game Enhancements:** Add more interactive elements and expand quiz functionality.
+- **Review Feed:** Introduce a dedicated feed for streamlined viewing of community reviews.
 ## Contributors
 <table>
   <tr>
@@ -235,17 +239,27 @@ Please refer to the [CONTRIBUTING.md](https://github.com/ychen-207523/BingeSugge
   </tr>
 </table>
 
-## Contact
-In case of any issues, please e-mail your queries to cablumsa@ncsu.edu or raise an issue on this repository.<br>
-Our team of developers monitors this e-mail address and would be happy to answer any and all questions you have about setup or use of this project!
+<table>
+  <tr>
+    <td><a href="https://github.com/csc-510-group-15/Project3_BingeSuggest">Version 9</a></td>
+    <td align="center"><a href="https://github.com/Hanqk97"><img src="https://avatars.githubusercontent.com/u/55620852?v=4" width="75px;" alt=""/><br /><sub><b>Hanqi Chen</b></sub></a></td>
+    <td align="center"><a href="https://github.com/KrishnaPallavalli"><img src="https://avatars.githubusercontent.com/u/55620852?v=4" width="75px;" alt=""/><br /><sub><b>Krishna Pallavalli</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Prismly"><img src="https://avatars.githubusercontent.com/u/36669379?v=4" width="75px;" alt=""/><br /><sub><b>Adam Imbert</b></sub></a></td>
+  </tr>
+</table>
 
-## Join the BingeSuggest Community:
 
-Contribute to the project and help us improve recommendations.
-Share your experience and film discoveries with us.
-Together, let's make BingeSuggest the ultimate movie companion!
-BingeSuggest is more than just code; it's a passion for cinema, and we invite you to be a part of this exciting journey. Start exploring, sharing, and discovering movies like never before with BingeSuggest!
-Let's make movie nights extraordinary together!
+## 📬 **Contact**
 
-## License
-This project is under the MIT License.
+For support or inquiries, email [cablumsa@ncsu.edu](mailto:cablumsa@ncsu.edu) or create an issue on GitHub.
+
+
+## 🎯 **Join Our Community**
+
+Contribute to making BingeSuggest even better. Share your cinematic discoveries, help develop features, and enhance movie nights everywhere!
+
+
+## 📜 **License**
+
+BingeSuggest is licensed under the [MIT License](https://github.com/CSC-510-Group-5/BingeSuggest/blob/main/LICENSE).
+
