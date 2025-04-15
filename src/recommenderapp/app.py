@@ -475,6 +475,9 @@ def wishlist_page():
     """
     Renders the wishlist page.
     """
+    page = int(request.args.get("page", 1))
+    page = int(request.args.get("page", 1))
+    page = int(request.args.get("page", 1))
     if user[1] is not None or user[1] == "guest":
         return render_template("wishlist.html")
     return render_template("login.html")
@@ -487,10 +490,13 @@ def add_movie_to_wishlist():
     """
     data = request.get_json()
     movie_name = data.get("movieName")
-    imdb_id = (
-        get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
-    )
 
+    # Get IMDb ID or movie name
+    imdb_id = data.get("imdb_id")
+    if not imdb_id:
+        movie_name = data.get("movieName")
+        imdb_id = get_imdb_id_by_name(g.db, movie_name) if movie_name else None
+    
     if not imdb_id:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
 
@@ -501,6 +507,7 @@ def add_movie_to_wishlist():
     if movie_id_result:
         movie_id = movie_id_result[0]
         user_id = user[1]
+        
         was_added = add_to_wishlist(g.db, user_id, movie_id)
 
         if was_added:

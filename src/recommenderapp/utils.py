@@ -442,6 +442,7 @@ def remove_from_wishlist(db, user_id, imdb_id):
 
     wishlist = cursor.fetchone()
     idMovies = None
+
     if wishlist is not None:
         idMovies = wishlist["idMovies"]
 
@@ -483,6 +484,8 @@ def get_imdb_id_by_name(db, movie_name):
     cursor = db.cursor()
     cursor.execute("SELECT imdb_id FROM Movies WHERE name = %s LIMIT 1", (movie_name,))
     result = cursor.fetchone()
+    print("0000000000000000000000000000000")
+    print(result)
     return result[0] if result else None
 
 

@@ -356,6 +356,6 @@ def test_news_and_quiz_pages_navigate_correctly(client):
     quiz_response = client.get("/games/quiz")
     news_html = news_response.get_data(as_text=True)
     quiz_html = quiz_response.get_data(as_text=True)
-    for endpoint in ["/search_page", "/wall", "/review", "/news", "/games/landing"]:
+    for endpoint in ["getStartedNav", "goToWallNav", "goToReviewNav", "goToWishlistNav", "/news", "/games/landing"]:
         assert endpoint in news_html
         assert endpoint in quiz_html
