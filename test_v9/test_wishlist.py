@@ -16,6 +16,7 @@ os.environ["DB_NAME"] = "test_db"
 
 from src.recommenderapp.app import app
 
+
 # --- Mock Database Classes ---
 class MockWishlistCursor:
     def __init__(self):
@@ -25,11 +26,13 @@ class MockWishlistCursor:
     def execute(self, query, params=None):
         self.last_execute = (query, params)
         if "SELECT" in query:
-            self.results = [{
-                "name": "Test Movie", 
-                "imdb_id": "tt1234567",
-                "time": "2023-01-01 00:00:00"
-            }]
+            self.results = [
+                {
+                    "name": "Test Movie",
+                    "imdb_id": "tt1234567",
+                    "time": "2023-01-01 00:00:00",
+                }
+            ]
         elif "INSERT" in query:
             return True
         elif "DELETE" in query:
@@ -62,6 +65,7 @@ class MockConnection:
 @pytest.fixture(autouse=True)
 def patch_mysql(monkeypatch):
     import mysql.connector
+
     monkeypatch.setattr(
         mysql.connector, "connect", lambda *args, **kwargs: MockConnection()
     )
@@ -98,7 +102,7 @@ def test_add_to_wishlist_success(client):
     response = client.post(
         "/add_to_wishlist",
         json={"imdb_id": "tt1234567"},
-        content_type="application/json"
+        content_type="application/json",
     )
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 200
@@ -111,10 +115,7 @@ def test_add_to_wishlist_duplicate(client):
     # First add
     client.post("/add_to_wishlist", json={"imdb_id": "tt1234567"})
     # Second add (duplicate)
-    response = client.post(
-        "/add_to_wishlist", 
-        json={"imdb_id": "tt1234567"}
-    )
+    response = client.post("/add_to_wishlist", json={"imdb_id": "tt1234567"})
     data = json.loads(response.get_data(as_text=True))
     assert data["status"] == "info"
     assert "already in wishlist" in data["message"]
@@ -125,7 +126,7 @@ def test_add_to_wishlist_invalid_movie(client):
     response = client.post(
         "/add_to_wishlist",
         json={"imdb_id": "invalid_id"},
-        content_type="application/json"
+        content_type="application/json",
     )
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 404
@@ -153,7 +154,7 @@ def test_delete_wishlist_item(client):
     response = client.post(
         "/deleteWishlistData",
         data=json.dumps("tt1234567"),
-        content_type="application/json"
+        content_type="application/json",
     )
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 200
@@ -166,7 +167,7 @@ def test_delete_nonexistent_wishlist_item(client):
     response = client.post(
         "/deleteWishlistData",
         data=json.dumps("tt0000000"),
-        content_type="application/json"
+        content_type="application/json",
     )
     data = json.loads(response.get_data(as_text=True))
     assert data["status"] == "info"
@@ -177,7 +178,7 @@ def test_wishlist_unauthorized_access(client):
     """Test wishlist access without authentication"""
     with client.session_transaction() as session:
         session.clear()  # Clear session to simulate logged out user
-    
+
     response = client.get("/wishlist")
     assert response.status_code == 302  # Should redirect to login
 
@@ -186,7 +187,7 @@ def test_wishlist_add_requires_auth(client):
     """Test wishlist add without authentication"""
     with client.session_transaction() as session:
         session.clear()
-    
+
     response = client.post("/add_to_wishlist", json={"imdb_id": "tt1234567"})
     assert response.status_code == 403  # Forbidden
 
@@ -195,11 +196,7 @@ def test_wishlist_data_structure(client):
     """Test wishlist data structure is correct"""
     response = client.get("/getWishlistData")
     data = json.loads(response.get_data(as_text=True))
-    assert all(
-        key in item 
-        for item in data 
-        for key in ["name", "imdb_id", "time"]
-    )
+    assert all(key in item for item in data for key in ["name", "imdb_id", "time"])
 
 
 def test_wishlist_add_with_movie_name(client):
@@ -207,7 +204,7 @@ def test_wishlist_add_with_movie_name(client):
     response = client.post(
         "/add_to_wishlist",
         json={"movieName": "Test Movie"},
-        content_type="application/json"
+        content_type="application/json",
     )
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 200
@@ -225,10 +222,12 @@ def test_wishlist_pagination(client):
     # Add multiple items first
     for i in range(15):
         client.post("/add_to_wishlist", json={"imdb_id": f"tt000000{i}"})
-    
+
     response = client.get("/wishlist?page=1")
     data = response.get_data(as_text=True)
-    assert "Showing 1-10" in data or "Page 1" in data  # Adjust based on your pagination UI
+    assert (
+        "Showing 1-10" in data or "Page 1" in data
+    )  # Adjust based on your pagination UI
 
 
 def test_wishlist_search_functionality(client):
@@ -251,7 +250,7 @@ def test_wishlist_item_count(client):
     # Add 3 items
     for i in range(3):
         client.post("/add_to_wishlist", json={"imdb_id": f"tt000000{i}"})
-    
+
     response = client.get("/getWishlistData")
     data = json.loads(response.get_data(as_text=True))
     assert len(data) == 3
@@ -261,7 +260,7 @@ def test_wishlist_with_guest_user(client):
     """Test wishlist behavior with guest user"""
     with client.session_transaction() as session:
         session["user_id"] = "guest"
-    
+
     response = client.get("/wishlist")
     assert response.status_code == 200
     data = response.get_data(as_text=True)
@@ -273,7 +272,7 @@ def test_wishlist_remove_nonexistent_item(client):
     response = client.post(
         "/deleteWishlistData",
         data=json.dumps("tt9999999"),
-        content_type="application/json"
+        content_type="application/json",
     )
     data = json.loads(response.get_data(as_text=True))
     assert data["status"] == "info"
