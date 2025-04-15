@@ -15,7 +15,6 @@ services:
     build: .
     ports:
       - "5001:5000"
-      - "3306:3306"
     depends_on:
       - db
     volumes:
