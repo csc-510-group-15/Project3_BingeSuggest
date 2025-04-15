@@ -162,12 +162,9 @@ def dummy_quiz_get(url, params=None, **kwargs):
 @pytest.fixture(autouse=True)
 def patch_requests_get(monkeypatch):
     def fake_requests_get(url, params=None, **kwargs):
-        from urllib.parse import urlparse
-
-        parsed_url = urlparse(url)
-        if parsed_url.hostname == "newsapi.org":
+        if "newsapi.org" in url:
             return dummy_news_get(url, params, **kwargs)
-        elif parsed_url.hostname == "opentdb.com":
+        elif "opentdb.com/api.php" in url:
             return dummy_quiz_get(url, params, **kwargs)
         else:
             import requests
