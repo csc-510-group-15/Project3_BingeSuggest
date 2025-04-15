@@ -409,7 +409,7 @@ def add_to_wishlist(db, user_id, movie_id, timestamp=None):
     # Check if the movie is already in the user's wishlist
     cursor.execute(
         "SELECT 1 FROM Wishlist WHERE user_id = %s AND movie_id = %s",
-        (int(user_id), int(movie_id)),
+        (int(user_id), str(movie_id)),
     )
     existing_entry = cursor.fetchone()
 

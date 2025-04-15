@@ -14,7 +14,8 @@ os.environ["DB_HOST"] = "localhost"
 os.environ["DB_PORT"] = "3306"
 os.environ["DB_NAME"] = "test_db"
 
-from src.recommenderapp.app import app
+from src.recommenderapp.app import app  # Import the Flask app
+import src.recommenderapp.app as srcapp
 
 
 # --- Mock Database Classes ---
@@ -92,6 +93,8 @@ def test_wishlist_page_content(client):
     """Test wishlist page contains correct elements"""
     response = client.get("/wishlist")
     data = response.get_data(as_text=True)
+    # Data here is currently the login page because user[1] == None
+    srcapp.user[1] = 1
     assert "My Wishlist" in data
     assert "Search for a Movie" in data
     assert "Add" in data
@@ -99,6 +102,7 @@ def test_wishlist_page_content(client):
 
 def test_add_to_wishlist_success(client):
     """Test adding movie to wishlist"""
+    srcapp.user[1] = 10
     response = client.post(
         "/add_to_wishlist",
         json={"imdb_id": "tt1234567"},
@@ -248,8 +252,9 @@ def test_wishlist_sorting(client):
 def test_wishlist_item_count(client):
     """Test wishlist item count is accurate"""
     # Add 3 items
-    for i in range(3):
-        client.post("/add_to_wishlist", json={"imdb_id": f"tt000000{i}"})
+    client.post("/add_to_wishlist", json={"imdb_id": f"tt0000001"})
+    client.post("/add_to_wishlist", json={"imdb_id": f"tt0000002"})
+    client.post("/add_to_wishlist", json={"imdb_id": f"tt0000003"})
 
     response = client.get("/getWishlistData")
     data = json.loads(response.get_data(as_text=True))
