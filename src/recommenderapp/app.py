@@ -491,11 +491,9 @@ def add_movie_to_wishlist():
     data = request.get_json()
     movie_name = data.get("movieName")
 
-    # Get IMDb ID or movie name
-    imdb_id = data.get("imdb_id")
-    if not imdb_id:
-        movie_name = data.get("movieName")
-        imdb_id = get_imdb_id_by_name(g.db, movie_name) if movie_name else None
+    imdb_id = (
+        get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
+    )
 
     if not imdb_id:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
