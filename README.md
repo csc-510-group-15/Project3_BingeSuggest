@@ -7,9 +7,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/LICENSE)
 [![Unit Tests](https://github.com/csc-510-group-15/Project3_BingeSuggest/actions/workflows/unittest.yml/badge.svg)](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/.github/workflows/unittest.yml)
 [![Pylint](https://github.com/csc-510-group-15/Project3_BingeSuggest/actions/workflows/pylint.yml/badge.svg)](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/.github/workflows/pylint.yml) 
+[![Code Coverage](https://github.com/csc-510-group-15/Project3_BingeSuggest/actions/workflows/codecoverage.yml/badge.svg)](https://github.com/csc-510-group-15/Project3_BingeSuggest/blob/main/.github/workflows/codecoverage.yml) 
 
 ![GitHub contributors](https://img.shields.io/github/contributors/csc-510-group-15/Project3_BingeSuggest)
-![GitHub Release Date](https://img.shields.io/badge/release_date-February_25-blue)
+![GitHub Release Date](https://img.shields.io/badge/release_date-April_15-blue)
 ![GitHub repo size](https://img.shields.io/github/repo-size/csc-510-group-15/Project3_BingeSuggest)
 
 <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/header_display.png" alt="BingeSuggest" style="width:1000px;"/>
