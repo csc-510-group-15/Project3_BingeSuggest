@@ -120,11 +120,11 @@ def higher_or_lower_game_page():
 
 
 @app.route("/getRandomMovie", methods=["GET"])
-def random_movie():
+def random_movie(override_id = -1):
     """
     Gets a random movie from the data set.
     """
-    return get_random_movie()
+    return get_random_movie(override_id)
 
 
 @app.route("/review")
@@ -714,7 +714,7 @@ def quiz_page():
     return render_template("quiz.html", questions=processed_questions)
 
 
-@app.route("/quiz/submit", methods=["POST"])
+@app.route("/games/quiz/submit", methods=["POST"])
 def quiz_submit():
     """
     Processes quiz submission, calculates the user's score, and returns the result including
