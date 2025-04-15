@@ -22,6 +22,7 @@
 - [Project Videos](#project-videos)
 - [Features Overview](#features-overview)
 - [Technical Stack](#technical-stack)
+- [Version 9 Features](#Version-9-Features)
 - [Getting Started](#getting-started)
 - [Future Improvements](#future-improvements)
 - [Contributing](#contributing)
