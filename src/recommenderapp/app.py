@@ -37,8 +37,8 @@ from src.recommenderapp.utils import (
     get_discussion,
     get_username_data,
     remove_from_watchlist,
-    add_to_wishlist,         
-    remove_from_wishlist,     
+    add_to_wishlist,
+    remove_from_wishlist,
     get_wishlist,
 )
 from src.recommenderapp.search import Search
