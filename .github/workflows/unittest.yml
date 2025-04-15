@@ -105,6 +105,8 @@ jobs:
     - name: Running test cases for page rendering and endpoints
       env:
           OMDB_API_KEY: "${{secrets.OMDB_API_KEY}}"
+          STREAMING_API_KEY: "${{secrets.STREAMING_API_KEY}}"
+          NEWS_API_KEY: "${{secrets.NEWS_API_KEY}}"
       run: python test_v8/cablumsa/test_endpoints.py
     - name: Running test cases for database operations
       run: python test_v8/mjh/test_db.py
