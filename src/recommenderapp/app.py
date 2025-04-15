@@ -214,7 +214,7 @@ def search():
     Handles movie search requests.
     """
     term = request.form["q"]
-    filter_term = request.form["filter"]
+    filter_term = request.form.get("filter")
     finder = Search()
     filtered_dict = finder.results_top_ten(term, filter_term)
     resp = jsonify(filtered_dict)
@@ -478,8 +478,22 @@ def get_wishlist():
     """
     Retrieves the current user's wishlist.
     """
-    user_id = user[1]
-    wishlist = get_wishlist(g.db, user_id)
+    """
+    Retrieves the current user's watchlist.
+    """
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+    cursor = g.db.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT m.name, m.imdb_id, w.time
+        FROM Wishlist w
+        JOIN Movies m ON w.movie_id = m.idMovies
+        WHERE w.user_id = %s
+        ORDER BY w.time DESC;
+        """,
+        [user_id],
+    )
+    wishlist = cursor.fetchall()
     return jsonify(wishlist), 200
 
 

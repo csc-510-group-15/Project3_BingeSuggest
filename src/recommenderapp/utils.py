@@ -408,7 +408,7 @@ def add_to_wishlist(db, user_id, movie_id, timestamp=None):
         if timestamp is None:
             timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         cursor.execute(
-            "INSERT INTO Wishlist (user_id, movie_id, added_date) VALUES (%s, %s, %s);",
+            "INSERT INTO Wishlist (user_id, movie_id, time) VALUES (%s, %s, %s);",
             (int(user_id), int(movie_id), timestamp),
         )
         db.commit()
