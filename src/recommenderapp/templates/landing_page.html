@@ -68,29 +68,27 @@
   <body class="landing-page">
     {% include 'navbar.html' %}
     <div class="container" style="margin-top: 60px;" id="centralDivLanding">
-      <div class="heading1">
-        <br><br><br><br>
-        <h1 class="righteous-regular"><center>🎬 BingeSuggest🍿🎬</center></h1>
-        <h2 class="coustard-regular"><center>Pick a Movie!</center></h2>
-        <p style="text-align: center; font-size: 18px;">
-          Discover personalized movie recommendations by selecting up to 5 of your favorite films.
-          <br>
-          Create a watchlist and have it conveniently sent to your email.
-          <br>
-          Enjoy movies at your own pace, on your terms.
-        </p>
-      </div>
-      <!-- Circle Buttons Row -->
-      <div class="row btn-row text-center">
-        <div class="col">
-          <a href="/wall" class="circle">Movie Wall</a>
-        </div>
-        <div class="col">
-          <a href="#" onclick="getStarted()" class="circle">Get Started!</a>
-        </div>
-        <div class="col">
-          <a href="#" onclick="goToReview()" id="goToReviewButton" class="circle">Review a Movie</a>
-        </div>
+      <div class="heading1"><br><br><br><br>
+        <h1><center class="righteous-regular">🎬 BingeSuggest🍿🎬</center></h1>
+        <h2><center class="coustard-regular">Pick a Movie! </center></h2>
+        <p style="text-align: center; color: azure; font-size: 18px;"><br>
+        Discover personalized movie recommendations by selecting up to 5 of your favorite films.
+        <br> 
+        Create a watchlist and have it conveniently sent to your email.
+        <br>
+        Enjoy movies at your own pace, on your terms.
+        </p><br>
+      <!-- <button id="getStartedButton" onclick="getStarted()" class="btn btn-primary mx-auto">Get Started!</button>
+      <button id="goToWallButton" onclick="goToWall()" class="btn btn-primary mx-auto">Go to Wall!</button><br><br>
+      <button id="goToReviewButton" onclick="goToReview()" class="btn btn-primary mx-auto">Review a Movie!</button>
+      <button id="goToProfileButton" onclick="goToProfile()" class="btn btn-primary mx-auto">Profile</button> -->
+
+      <div class="container mt-2 text-center">
+        <div class="row ">
+          <div class="col mx-4"><a href="#" id="goToWallButton" onclick="goToWall()" class="circle" >Movie Wall</a></div>
+          <!-- <div class="col-sm-4"><div class="circle">Get Started! </div></div> -->
+          <div class="col mx-4"> <a href="#" id="getStartedButton" onclick="getStarted()" class="circle" >Get Started!</a></div>
+          <div class="col mx-4 "><a href="#" id="goToWishlist" onclick="goToWishlist()" class="circle" >Create a Wishlist</a></div>
         <div class="col">
           <a href="/news" class="circle">Movie News</a>
         </div>
