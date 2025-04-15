@@ -272,7 +272,7 @@ def test_wishlist_page_navigate_correctly(client):
         "getStartedNav",
         "goToWallNav",
         "goToReviewNav",
-        "goToWishlistNav",
+        "/wishlist",
         "/news",
         "/games/landing",
     ]:

@@ -360,7 +360,7 @@ def test_news_and_quiz_pages_navigate_correctly(client):
         "getStartedNav",
         "goToWallNav",
         "goToReviewNav",
-        "goToWishlistNav",
+        "/wishlist",
         "/news",
         "/games/landing",
     ]:
