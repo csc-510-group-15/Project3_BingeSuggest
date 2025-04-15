@@ -19,17 +19,17 @@ def get_total_movie_count():
     return len(movies)
 
 
-def get_random_movie(id_override = -1):
+def get_random_movie(id_override=-1):
     """
     Returns a random movie from the dataset.
     """
     movies = pd.read_csv(os.path.join(project_dir, "data", "movies.csv"))
 
-    if (id_override >= get_total_movie_count()):
+    if id_override >= get_total_movie_count():
         return {}
-    if (id_override >= 0):
+    if id_override >= 0:
         return {"imdbID": movies["imdb_id"][id_override]}
-    
+
     rand_id = rand.randrange(0, len(movies))
     return {"imdbID": movies["imdb_id"][rand_id]}
 
