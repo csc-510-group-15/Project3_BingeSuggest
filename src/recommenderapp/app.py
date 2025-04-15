@@ -499,7 +499,7 @@ def add_movie_to_wishlist():
     movie_id_result = cursor.fetchone()
 
     if movie_id_result:
-        movie_id = movie_id_result["imdb_id"]
+        movie_id = movie_id_result[0]
         user_id = user[1]
         was_added = add_to_wishlist(g.db, user_id, movie_id)
 
